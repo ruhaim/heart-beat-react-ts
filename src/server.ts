@@ -17,12 +17,12 @@ const userFactory = Factory.extend<User>({
     name() {
         return ""
     },
-    email(){return ""},
-    dob(){return new Date()},
-    city(){return ""},
-    createdOn(){return new Date()},
-    mobile(){return ""},
-    updatedOn(){return new Date()}
+    email() { return "" },
+    dob() { return new Date() },
+    city() { return "" },
+    createdOn() { return new Date() },
+    mobile() { return "" },
+    updatedOn() { return new Date() }
 })
 
 export const factories = {
@@ -33,17 +33,17 @@ type AppSchema = Schema<AppRegistry>
 
 export function makeServer({ environment = "test" } = {}) {
     let server = createServer({
-       // environment,
+        // environment,
 
         models,
 
         routes() {
             this.namespace = "api"
 
-            this.get("/users", (schema:AppSchema) => {
+            this.get("/users", (schema: AppSchema) => {
                 const allUsers = schema.all("user")
                 return new Response(200, {}, allUsers)
-                 
+
             })
         },
     })
