@@ -1,22 +1,22 @@
 import { apiSlice } from '../../store/apiSlice';
-import type {User} from './userTypes'
+import type {User, UserListResponse} from './userTypes'
 
 const userApi = apiSlice.injectEndpoints({
   overrideExisting: false,
   endpoints: (build) => ({
-    getUsers: build.query<User[], void>({
-      query: () => ({ url: "user" })
+    getUsers: build.query<UserListResponse, void>({
+      query: () => ({ url: "users" })
     }),
     createUser: build.mutation<User, Omit<User, 'id' | 'createdOn' | 'updateOn'>>({
       query: ({ ...patch }) => ({
-        url: `user`,
+        url: `users`,
         method: 'POST',
         body: patch,
       }),
     }),
     updateUser: build.mutation<User, Partial<User> & Pick<User, 'id'>>({
       query: ({ id, ...patch }) => ({
-        url: `user/${id}`,
+        url: `users/${id}`,
         method: 'PATCH',
         body: patch,
       }),
