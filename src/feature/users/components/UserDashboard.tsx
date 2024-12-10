@@ -1,5 +1,6 @@
 import { FC } from "react";
 import userApi from "../userApi";
+import { UserListTable } from "./UserListTable";
 
 type UserDashboardProps = {}
 const { useGetUsersQuery } = userApi
@@ -12,11 +13,9 @@ export const UserDashboard: FC<UserDashboardProps> = () => {
     }
 
     return <>
-<>Testin</>
-        <div>{userList?.map((user) => <div key={user.id}>
+        <>Testin</>
+        <UserListTable userList={userList?.users || []} />
 
-            {JSON.stringify(user)}
-        </div>)}</div>
 
     </>
 

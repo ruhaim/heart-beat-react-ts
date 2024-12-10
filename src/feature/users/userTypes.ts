@@ -2,10 +2,14 @@ export type User = {
   id: number,
   name: string,
   email: string,
-  gender: 'M'|'F'
+  gender: 'M' | 'F'
   dob: Date,
   city: string
   mobile: string
   createdOn: Date,
   updatedOn: Date,
+}
+
+export type UserListResponse = {
+  users: User[]
 }
