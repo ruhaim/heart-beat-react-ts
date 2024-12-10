@@ -7,7 +7,7 @@ import { UserDashboard } from './feature/users/components/UserDashboard'
 
 function App() {
   const [count, setCount] = useState(0)
-
+ 
 
   return (
     <>
@@ -20,7 +20,7 @@ function App() {
         </a>
       </div>
       <h1>Vite + React</h1>
-      <UserDashboard/>
+      <UserDashboard />
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
