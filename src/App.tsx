@@ -1,37 +1,37 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
 import { UserDashboard } from './feature/users/components/UserDashboard'
-
+import { AppBar, Box, Container, Grid2 as Grid, Toolbar, Typography, styled } from '@mui/material'
+import { DarkModeToggler } from './theme/DarkModeToggler'
 
 function App() {
-  const [count, setCount] = useState(0)
- 
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <UserDashboard />
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <AppBar position="fixed">
+        <Toolbar>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            HeartBeat
+          </Typography>
+          <DarkModeToggler />
+        </Toolbar>
+      </AppBar>
+
+      <Container sx={{ marginTop: "4em" }}>
+
+        <Grid container spacing={2} columns={16}>
+          <Grid size={8}>
+            <Box>Box 1</Box>
+          </Grid>
+          <Grid size={8}>
+            <Box>Box 2</Box>
+          </Grid>
+          <Grid size={16}>
+            <UserDashboard />
+          </Grid>
+        </Grid>
+
+      </Container>
+
     </>
   )
 }
