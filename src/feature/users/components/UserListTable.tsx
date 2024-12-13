@@ -2,10 +2,11 @@ import { FC, useCallback, useMemo, useState } from "react";
 import { User } from "../userTypes";
 
 import { AgGridReact } from 'ag-grid-react'; // React Data Grid Component
-import "ag-grid-community/styles/ag-grid.css"; // Mandatory CSS required by the Data Grid
-import "ag-grid-community/styles/ag-theme-quartz.css"; // Optional Theme applied to the Data Grid
+import "ag-grid-community/styles/ag-grid.min.css"; // Mandatory CSS required by the Data Grid
+import "ag-grid-community/styles/ag-theme-material.min.css"; // Optional Theme applied to the Data Grid
 import { ColDef } from 'ag-grid-community';
 import { UserListActionButton } from "./UserListActionButton";
+import { useColorScheme } from "@mui/material/styles";
 
 type UserListTableProps = {
     userList: User[]
@@ -13,6 +14,7 @@ type UserListTableProps = {
 
 export const UserListTable: FC<UserListTableProps> = (props) => {
     const { userList } = props
+    const { mode } = useColorScheme();
 
     // Row Data: The data to be displayed.
     const [rowData, setRowData] = useState(userList);
@@ -36,18 +38,22 @@ export const UserListTable: FC<UserListTableProps> = (props) => {
         { headerName: "Actions", cellRenderer: UserListActionButton, cellRendererParams: { onEditClick: editBtnClickHandler } }
     ], []);
 
-    return <div>
-        <div
-            className="ag-theme-quartz" // applying the Data Grid theme
-            style={{ height: 500 }} // the Data Grid will fill the size of the parent container
-        >
-            <AgGridReact
-                rowData={rowData}
-                columnDefs={colDefs}
-                onRowDoubleClicked={(row) => {
-                    showEditPopup(row.data?.id)
-                }}
-            />
-        </div>
+    return <div
+        className={`ag-theme-material${mode === 'dark' ? '-dark' : ''}`} // applying the Data Grid theme
+        style={{ height: '100%' }} // the Data Grid will fill the size of the parent container
+    >
+        <AgGridReact
+            rowData={rowData}
+            columnDefs={colDefs}
+            onRowDoubleClicked={(row) => {
+                showEditPopup(row.data?.id)
+            }}
+            onModelUpdated={(event) => {
+
+                console.log(event.newData)
+            }}
+
+        />
     </div>
+
 } 
