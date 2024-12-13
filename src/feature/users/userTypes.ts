@@ -2,7 +2,7 @@ export type User = {
   id: number,
   name: string,
   email: string,
-  gender: 'M' | 'F'
+  gender: 'male' | 'female'
   dob: Date,
   city: string
   mobile: string
