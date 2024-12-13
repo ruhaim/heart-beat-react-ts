@@ -31,14 +31,35 @@ export const UserListTable: FC<UserListTableProps> = (props) => {
             resizable: false
         },
         { field: "name", filter: true, minWidth: 120, initialFlex: 1 },
-        { field: "gender", filter: true, width: 80, minWidth: 60, resizable: false },
-        { field: "city", filter: true },
-        { field: "dob", filter: true },
+        {
+            field: "gender", width: 100, minWidth: 80, resizable: false,
+            filter: 'agSetColumnFilter',
+        },
+        { field: "city", filter: 'agSetColumnFilter', width: 100, minWidth: 80 },
+        {
+            field: "dob", filter: 'agDateColumnFilter', width: 100, minWidth: 80, valueFormatter: ({ value }) => {
+                if (!value) {
+                    return value
+                }
+                return Intl.DateTimeFormat(undefined, {
+                    dateStyle: 'medium',
+
+                }).format(new Date(value))
+
+
+            }, valueGetter: (value) => {
+                if (!value.data?.dob) {
+                    return ""
+                }
+                return new Date(value.data.dob)
+            }
+        },
         {
             headerName: "Actions",
             cellRenderer: UserListActionButton,
             cellRendererParams: { onEditClick: editBtnClickHandler },
             pinned: "right",
+            sortable: false,
             maxWidth: 100
         }
     ], []);

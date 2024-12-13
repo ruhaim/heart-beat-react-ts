@@ -3,11 +3,11 @@ export type User = {
   name: string,
   email: string,
   gender: 'male' | 'female'
-  dob: Date,
+  dob: string,
   city: string
   mobile: string
-  createdOn: Date,
-  updatedOn: Date,
+  createdOn: string,
+  updatedOn: string,
 }
 
 export type UserListResponse = {
