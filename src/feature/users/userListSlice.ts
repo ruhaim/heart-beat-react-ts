@@ -1,21 +1,28 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { User } from './userTypes';
+import userApi from './userApi';
 
 interface UserListState {
   value: number;
-  status: 'idle' | 'loading' | 'failed';
+  userList: User[]
+ 
 }
 
 const initialState: UserListState = {
   value: 0,
-  status: 'idle',
+  userList:[],
+
 };
 
 
 export const userListStateSlice = createSlice({
-  name: 'counter',
+  name: 'userList',
   reducerPath:"userListState",
   initialState,
   reducers: {
+    setList:(state, action: PayloadAction<User[]>)=>{
+      state.userList = action.payload
+    },
     increment: state => {
       // Redux Toolkit allows us to write "mutating" logic in reducers. It
       // doesn't actually mutate the state because it uses the Immer library,
@@ -31,6 +38,12 @@ export const userListStateSlice = createSlice({
       state.value += action.payload;
     },
   },
+  extraReducers:(builder)=>{
+    builder.addMatcher(userApi.endpoints.getUsers.matchFulfilled,(state, action,)=>{
+      state.userList = action.payload.users
+    })
+  }
+
 
 });
 

@@ -1,10 +1,10 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import userPageState from '../feature/users/userPageStateSlice';
+import userListSlice from '../feature/users/userListSlice';
 import { apiSlice } from './apiSlice';
 
 export const store = configureStore({
   reducer: {
-    [userPageState.reducerPath]: userPageState.reducer,
+    [userListSlice.reducerPath]: userListSlice.reducer,
     [apiSlice.reducerPath]: apiSlice.reducer
   },
   middleware: (getDefaultMiddleware) =>
