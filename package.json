@@ -47,7 +47,8 @@
   },
   "lint-staged": {
     "*.{ts,tsx}": [
-      "eslint --max-warnings 0 ."
-    ]
+      "eslint --cache --fix"
+    ],
+    "*.js": "eslint --cache --fix"
   }
 }
