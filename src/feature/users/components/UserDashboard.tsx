@@ -1,20 +1,17 @@
 import { FC } from "react";
+
 import userApi from "../userApi";
+
 import { UserListTable } from "./UserListTable";
-import LinearProgress from "@mui/material/LinearProgress";
 
-type UserDashboardProps = {}
-const { useGetUsersQuery } = userApi
+const { useGetUsersQuery } = userApi;
 
-export const UserDashboard: FC<UserDashboardProps> = () => {
+export const UserDashboard: FC = () => {
+  const { isLoading, data: userList } = useGetUsersQuery();
 
-    const { isLoading, data: userList } = useGetUsersQuery()
-
-
-    return <>
-        <UserListTable rowData={userList?.users || []} loading={isLoading} />
-
-
+  return (
+    <>
+      <UserListTable rowData={userList?.users || []} loading={isLoading} />
     </>
-
-}
+  );
+};

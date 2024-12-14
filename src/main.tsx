@@ -1,19 +1,20 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import App from './App.tsx'
-import { makeServer } from './server.ts'
-import { store } from './store/store'
-import { Provider } from 'react-redux'
-import { ThemeProvider } from './theme/ThemeProvider.tsx'
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import { Provider } from "react-redux";
 
-makeServer()
+import App from "./App.tsx";
+import { makeServer } from "./server.ts";
+import { store } from "./store/store";
+import { ThemeProvider } from "./theme/ThemeProvider.tsx";
 
-createRoot(document.getElementById('root')!).render(
+makeServer();
+
+createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <Provider store={store}>
-      <ThemeProvider >
+      <ThemeProvider>
         <App />
       </ThemeProvider>
     </Provider>
-  </StrictMode>,
-)
+  </StrictMode>
+);
