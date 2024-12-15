@@ -1,6 +1,7 @@
 {
   "name": "heart-beat-users",
   "private": true,
+  "homepage": "https://ruhaim.github.io/heart-beat-react-ts/",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
