@@ -7,7 +7,7 @@ import { makeServer } from "./server.ts";
 import { store } from "./store/store";
 import { ThemeProvider } from "./theme/ThemeProvider.tsx";
 
-makeServer();
+makeServer({ environment: "development" });
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
