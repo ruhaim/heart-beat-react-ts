@@ -1,5 +1,5 @@
 import { faker } from "@faker-js/faker";
-import { createServer, Model, Registry, Request } from "miragejs";
+import { createServer, Model, Registry, Request, Response } from "miragejs";
 import { ModelDefinition } from "miragejs/-types";
 import Schema from "miragejs/orm/schema";
 
@@ -56,9 +56,36 @@ export function makeServer({ environment = "test" } = {}) {
         return users;
       });
 
+      this.get("users/:id", (schema: AppSchema, request: Request) => {
+        const id = request.params.id;
+        return schema.find("user", id);
+      });
+
       this.post("/users", (schema: AppSchema, request: Request) => {
         const attrs = JSON.parse(request.requestBody);
         return schema.create("user", attrs);
+      });
+
+      this.patch("/users/:id", (schema: AppSchema, request: Request) => {
+        const id = request.params?.id;
+        try {
+          const attrs = JSON.parse(request.requestBody);
+          const user = schema.find("user", id);
+          user?.update("id", attrs);
+        } catch (e) {
+          return new Response(400, {}, { errors: [e] });
+        }
+        return new Response(200, { "content-id": id }, { id });
+      });
+
+      this.delete("/:id", (schema, request) => {
+        const id = request.params?.id;
+        try {
+          schema.find("user", id)?.destroy();
+        } catch (e) {
+          return new Response(400, {}, { errors: [e] });
+        }
+        return new Response(200, { "content-id": id }, { id });
       });
     },
   });
