@@ -6,11 +6,13 @@ import { withZodSchema } from "formik-validator-zod";
 import { z } from "zod";
 import { FC } from 'react';
 import { EditUserStateType } from '../users-list/userTypes';
+import Stack from '@mui/material/Stack';
+import Container from '@mui/material/Container';
 
 const UseEditFormSchema = z.object({
-    id: z.number(),
+    id: z.string(),
     name: z.string(),
-    email: z.string(),
+    email: z.string().email(),
     gender: z.union([z.literal("male"), z.literal("female")]),
     dob: z.string(),
     city: z.string(),
@@ -33,6 +35,7 @@ export const UserEditForm: FC<UserEditFormProps> = ({ userId, userEntity }) => {
             ...userEntity
         },
         onSubmit: (values) => {
+            debugger
             alert(JSON.stringify(values));
         },
         validate: withZodSchema(UseEditFormSchema),
@@ -43,11 +46,11 @@ export const UserEditForm: FC<UserEditFormProps> = ({ userId, userEntity }) => {
         )}\n\n`
     );
     return (
-        <section>
-            <form
-                onSubmit={formik.handleSubmit}
-
-            >
+        <Container component='section'>
+            <Stack component="form" title='Edit User' onSubmit={(ev) => {
+                debugger
+                return formik.handleSubmit(ev)
+            }} spacing={{ xs: 1, sm: 2 }}>
                 <Typography variant="h6">Edit User</Typography>
                 <TextField
                     id="name"
@@ -55,6 +58,7 @@ export const UserEditForm: FC<UserEditFormProps> = ({ userId, userEntity }) => {
                     label="Name"
                     placeholder="Name"
                     fullWidth
+                    error={!!formik.errors.name && formik.touched.name}
                     {...formik.getFieldProps("name")}
                 />
                 {formik.errors.name && formik.touched.name && (
@@ -83,7 +87,7 @@ export const UserEditForm: FC<UserEditFormProps> = ({ userId, userEntity }) => {
                     {...formik.getFieldProps("email")}
                 />
                 {formik.errors.email && formik.touched.email && (
-                    <div className="text-sm text-red-600 border-2 border-red-600 w-full h-8 bg-red-100 rounded-md flex justify-center items-center">
+                    <div>
                         {formik.errors.email}
                     </div>
                 )}
@@ -96,7 +100,7 @@ export const UserEditForm: FC<UserEditFormProps> = ({ userId, userEntity }) => {
                     {...formik.getFieldProps("city")}
                 />
                 {formik.errors.city && formik.touched.city && (
-                    <div className="text-sm text-red-600 border-2 border-red-600 w-full h-8 bg-red-100 rounded-md flex justify-center items-center">
+                    <div>
                         {formik.errors.city}
                     </div>
                 )}
@@ -116,7 +120,7 @@ export const UserEditForm: FC<UserEditFormProps> = ({ userId, userEntity }) => {
                 <Button variant="contained" type="submit" fullWidth>
                     Submit
                 </Button>
-            </form>
-        </section>
+            </Stack>
+        </Container>
     );
 }

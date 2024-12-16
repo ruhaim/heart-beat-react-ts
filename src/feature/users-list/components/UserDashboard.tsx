@@ -20,7 +20,6 @@ export const UserDashboard: FC = () => {
     <>
       <FullScreenModal open={!!editState || false} onClose={() => {
         appDispatch(setUserEditState());
-
       }}>
         {editState && <UserEditForm userId={editState.userId} userEntity={editState.userEntity} />}
       </FullScreenModal>

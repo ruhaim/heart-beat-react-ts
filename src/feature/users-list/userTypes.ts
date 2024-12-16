@@ -1,5 +1,5 @@
 export type User = {
-  id: number;
+  id: string;
   name: string;
   email: string;
   gender: "male" | "female";
@@ -18,10 +18,10 @@ export type CreateUserStateType = {
   userEntity?: Omit<Partial<User>, 'id'>;
 }
 export type EditUserStateType = {
-  userId: number
+  userId: User['id']
   userEntity?: Omit<Partial<User>, 'id'>;
 }
 
 export type DeleteUserStateType = {
-  userId: number
+  userId: User['id']
 }
