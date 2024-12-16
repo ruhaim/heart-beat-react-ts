@@ -5,11 +5,11 @@ import { IconButton, Stack } from "@mui/material";
 import Tooltip from "@mui/material/Tooltip";
 import { CustomCellRendererProps } from "ag-grid-react";
 
-import { User } from "../userTypes";
+import { DeleteUserStateType, EditUserStateType, User } from "../userTypes";
 
 type UserListActionButtonProps = CustomCellRendererProps<User> & {
-  onDeleteClick: (data?: Partial<User>) => void;
-  onEditClick: (data?: Partial<User>) => void;
+  onDeleteClick: (data?: DeleteUserStateType) => void;
+  onEditClick: (data?: EditUserStateType) => void;
 };
 
 export const UserListActionButton: FC<UserListActionButtonProps> = ({
@@ -18,11 +18,15 @@ export const UserListActionButton: FC<UserListActionButtonProps> = ({
   data,
 }) => {
   const editClickHandler = useCallback(() => {
-    onEditClick(data);
+    if (data) {
+      onEditClick({ userId: data.id, userEntity: data });
+    }
   }, [onEditClick, data]);
 
   const deleteClickHandler = useCallback(() => {
-    onDeleteClick(data);
+    if (data) {
+      onDeleteClick({ userId: data.id });
+    }
   }, [onDeleteClick, data]);
   return (
     <Stack

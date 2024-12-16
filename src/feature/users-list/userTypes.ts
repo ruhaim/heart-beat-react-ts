@@ -13,3 +13,15 @@ export type User = {
 export type UserListResponse = {
   users: User[];
 };
+
+export type CreateUserStateType = {
+  userEntity?: Omit<Partial<User>, 'id'>;
+}
+export type EditUserStateType = {
+  userId: number
+  userEntity?: Omit<Partial<User>, 'id'>;
+}
+
+export type DeleteUserStateType = {
+  userId: number
+}

@@ -7,8 +7,8 @@ import { ColDef } from "ag-grid-community";
 import { AgGridReact, AgGridReactProps } from "ag-grid-react"; // React Data Grid Component
 
 import { useAppDispatch } from "../../../store/storeHooks";
-import { setDeleteState, setEditState } from "../userListSlice";
-import { User } from "../userTypes";
+import { setUserDeleteState, setUserEditState } from "../userListSlice";
+import { EditUserStateType, User } from "../userTypes";
 
 import { UserListActionButton } from "./UserListActionButton";
 import { UserListLoadingOverlay } from "./UserListLoadingOverlay";
@@ -19,23 +19,24 @@ export const UserListTable: FC<UserListTableProps> = (props) => {
   const { mode } = useColorScheme();
   const appDispatch = useAppDispatch();
 
-  const editBtnClickHandler = useCallback<(data: Partial<User>) => void>(
-    (data) => {
-      appDispatch(setEditState({ active: true, userEntity: data }));
-    },
-    [appDispatch]
-  );
-
-  const deleteBtnClickHandler = useCallback<(data: Partial<User>) => void>(
-    (data) => {
-      appDispatch(setDeleteState({ active: true, userEntity: data }));
-    },
-    [appDispatch]
-  );
-
-  const showEditPopup = (userId?: number) => {
-    console.log(userId);
+  const showEditPopup = (data: EditUserStateType) => {
+    appDispatch(setUserEditState(data));
   };
+  const editBtnClickHandler = useCallback<(data: EditUserStateType) => void>(
+    (data) => {
+      showEditPopup(data)
+    },
+    [appDispatch]
+  );
+
+  const deleteBtnClickHandler = useCallback<(data: User) => void>(
+    (data) => {
+      appDispatch(setUserDeleteState({ userId: data.id }));
+    },
+    [appDispatch]
+  );
+
+
 
   // Column Definitions: Defines the columns to be displayed.
   const colDefs = useMemo<ColDef<User>[]>(

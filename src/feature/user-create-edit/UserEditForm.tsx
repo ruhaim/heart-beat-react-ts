@@ -4,6 +4,8 @@ import Typography from '@mui/material/Typography';
 import { useFormik } from "formik";
 import { withZodSchema } from "formik-validator-zod";
 import { z } from "zod";
+import { FC } from 'react';
+import { EditUserStateType } from '../users-list/userTypes';
 
 const UseEditFormSchema = z.object({
     id: z.number(),
@@ -16,16 +18,19 @@ const UseEditFormSchema = z.object({
 })
 
 type RegisterFormSchemaType = z.infer<typeof UseEditFormSchema>;
-export default function Page() {
+type UserEditFormProps = EditUserStateType
+
+export const UserEditForm: FC<UserEditFormProps> = ({ userId, userEntity }) => {
     const formik = useFormik<RegisterFormSchemaType>({
         initialValues: {
-            id: 0,
+            id: userId,
             name: "",
             dob: "",
             email: "",
             gender: "male",
             city: "",
-            mobile: ""
+            mobile: "",
+            ...userEntity
         },
         onSubmit: (values) => {
             alert(JSON.stringify(values));

@@ -1,30 +1,20 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import userApi from "./userApi";
-import { User } from "./userTypes";
+import { CreateUserStateType, DeleteUserStateType, EditUserStateType, User } from "./userTypes";
+import { number } from "prop-types";
 
 interface UserListState {
   value: number;
   userList: User[];
-  editState?: {
-    active: boolean;
-    userEntity?: Partial<User>;
-  };
-  deleteState?: {
-    active: boolean;
-    userEntity?: Partial<User>;
-  };
+  createState?: CreateUserStateType;
+  editState?: EditUserStateType;
+  deleteState?: DeleteUserStateType;
 }
 
 const initialState: UserListState = {
   value: 0,
   userList: [],
-  editState: {
-    active: false,
-  },
-  deleteState: {
-    active: false,
-  },
 };
 
 export const userListStateSlice = createSlice({
@@ -35,17 +25,24 @@ export const userListStateSlice = createSlice({
     setList: (state, action: PayloadAction<User[]>) => {
       state.userList = action.payload;
     },
-    setEditState: (
+    setUserEditState: (
       state,
       action: PayloadAction<UserListState["editState"]>
     ) => {
+      debugger
       state.editState = action.payload;
     },
-    setDeleteState: (
+    setUserDeleteState: (
       state,
       action: PayloadAction<UserListState["deleteState"]>
     ) => {
       state.deleteState = action.payload;
+    },
+    setUserCreateState: (
+      state,
+      action: PayloadAction<UserListState["createState"]>
+    ) => {
+      state.createState = action.payload;
     },
     increment: (state) => {
       // Redux Toolkit allows us to write "mutating" logic in reducers. It
@@ -76,8 +73,9 @@ export const {
   increment,
   decrement,
   incrementByAmount,
-  setEditState,
-  setDeleteState,
+  setUserCreateState,
+  setUserDeleteState,
+  setUserEditState
 } = userListStateSlice.actions;
 
 export default {
