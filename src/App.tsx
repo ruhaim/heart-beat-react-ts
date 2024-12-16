@@ -6,7 +6,7 @@ import {
   Typography,
 } from "@mui/material";
 
-import { UserDashboard } from "./feature/users/components/UserDashboard";
+import { UserDashboard } from "./feature/users-list/components/UserDashboard";
 import { CityDistributionChart } from "./feature/users-vis/components/CityDistributionChart";
 import { GenderDistributionChart } from "./feature/users-vis/components/GenderDistributionChart";
 import { DarkModeToggler } from "./theme/DarkModeToggler";

@@ -1,4 +1,4 @@
-import { User } from "../../users/userTypes";
+import { User } from "../../users-list/userTypes";
 
 export type KeyFrequency = {
   key: string;

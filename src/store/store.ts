@@ -1,6 +1,6 @@
 import { Action, configureStore, ThunkAction } from "@reduxjs/toolkit";
 
-import userListSlice from "../feature/users/userListSlice";
+import userListSlice from "../feature/users-list/userListSlice";
 
 import { apiSlice } from "./apiSlice";
 

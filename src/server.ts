@@ -3,7 +3,7 @@ import { createServer, Model, Registry, Request, Response } from "miragejs";
 import { ModelDefinition } from "miragejs/-types";
 import Schema from "miragejs/orm/schema";
 
-import { User } from "./feature/users/userTypes";
+import { User } from "./feature/users-list/userTypes";
 
 const UserModel: ModelDefinition<User> = Model.extend({});
 
