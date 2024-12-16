@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import userApi from "./userApi";
 import { CreateUserStateType, DeleteUserStateType, EditUserStateType, User } from "./userTypes";
-import { number } from "prop-types";
+
 
 interface UserListState {
   value: number;

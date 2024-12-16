@@ -11,12 +11,12 @@ import Container from '@mui/material/Container';
 
 const UseEditFormSchema = z.object({
     id: z.string(),
-    name: z.string(),
-    email: z.string().email(),
+    name: z.string().trim().min(1, { message: "Name is required" }),
+    email: z.string().email({ message: "Email is required" }),
     gender: z.union([z.literal("male"), z.literal("female")]),
     dob: z.string(),
-    city: z.string(),
-    mobile: z.string(),
+    city: z.string().trim().min(1, { message: "City is required" }),
+    mobile: z.string().trim().min(1, { message: "Mobile is required" }),
 })
 
 type RegisterFormSchemaType = z.infer<typeof UseEditFormSchema>;
@@ -48,7 +48,6 @@ export const UserEditForm: FC<UserEditFormProps> = ({ userId, userEntity }) => {
     return (
         <Container component='section'>
             <Stack component="form" title='Edit User' onSubmit={(ev) => {
-                debugger
                 return formik.handleSubmit(ev)
             }} spacing={{ xs: 1, sm: 2 }}>
                 <Typography variant="h6">Edit User</Typography>
@@ -58,26 +57,19 @@ export const UserEditForm: FC<UserEditFormProps> = ({ userId, userEntity }) => {
                     label="Name"
                     placeholder="Name"
                     fullWidth
-                    error={!!formik.errors.name && formik.touched.name}
                     {...formik.getFieldProps("name")}
+                    error={!!formik.errors.name && formik.touched.name}
+                    helperText={formik.errors.name}
                 />
-                {formik.errors.name && formik.touched.name && (
-                    <div >
-                        {formik.errors.name}
-                    </div>
-                )}
                 <TextField
                     id="dob"
                     type="date"
                     label="Date of Birth"
                     fullWidth
                     {...formik.getFieldProps("dob")}
+                    error={!!formik.errors.dob && formik.touched.dob}
+                    helperText={formik.errors.dob}
                 />
-                {formik.errors.dob && formik.touched.dob && (
-                    <div>
-                        {formik.errors.dob}
-                    </div>
-                )}
                 <TextField
                     id="email"
                     type="email"
@@ -85,12 +77,10 @@ export const UserEditForm: FC<UserEditFormProps> = ({ userId, userEntity }) => {
                     placeholder="johndoe@example.com"
                     fullWidth
                     {...formik.getFieldProps("email")}
+                    error={!!formik.errors.email && formik.touched.email}
+                    helperText={formik.errors.email}
                 />
-                {formik.errors.email && formik.touched.email && (
-                    <div>
-                        {formik.errors.email}
-                    </div>
-                )}
+
                 <TextField
                     id="city"
                     type="city"
@@ -98,12 +88,9 @@ export const UserEditForm: FC<UserEditFormProps> = ({ userId, userEntity }) => {
                     placeholder="City"
                     fullWidth
                     {...formik.getFieldProps("city")}
+                    error={!!formik.errors.city && formik.touched.city}
+                    helperText={formik.errors.city}
                 />
-                {formik.errors.city && formik.touched.city && (
-                    <div>
-                        {formik.errors.city}
-                    </div>
-                )}
                 <TextField
                     id="gender"
                     type="text"
@@ -111,12 +98,10 @@ export const UserEditForm: FC<UserEditFormProps> = ({ userId, userEntity }) => {
                     placeholder="Gender"
                     fullWidth
                     {...formik.getFieldProps("gender")}
+                    error={!!formik.errors.gender && formik.touched.gender}
+                    helperText={formik.errors.gender}
                 />
-                {formik.errors.gender && formik.touched.gender && (
-                    <div>
-                        {formik.errors.gender}
-                    </div>
-                )}
+
                 <Button variant="contained" type="submit" fullWidth>
                     Submit
                 </Button>
