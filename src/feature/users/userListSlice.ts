@@ -6,11 +6,25 @@ import { User } from "./userTypes";
 interface UserListState {
   value: number;
   userList: User[];
+  editState?: {
+    active: boolean;
+    userEntity?: Partial<User>;
+  };
+  deleteState?: {
+    active: boolean;
+    userEntity?: Partial<User>;
+  };
 }
 
 const initialState: UserListState = {
   value: 0,
   userList: [],
+  editState: {
+    active: false,
+  },
+  deleteState: {
+    active: false,
+  },
 };
 
 export const userListStateSlice = createSlice({
@@ -20,6 +34,18 @@ export const userListStateSlice = createSlice({
   reducers: {
     setList: (state, action: PayloadAction<User[]>) => {
       state.userList = action.payload;
+    },
+    setEditState: (
+      state,
+      action: PayloadAction<UserListState["editState"]>
+    ) => {
+      state.editState = action.payload;
+    },
+    setDeleteState: (
+      state,
+      action: PayloadAction<UserListState["deleteState"]>
+    ) => {
+      state.deleteState = action.payload;
     },
     increment: (state) => {
       // Redux Toolkit allows us to write "mutating" logic in reducers. It
@@ -46,8 +72,13 @@ export const userListStateSlice = createSlice({
   },
 });
 
-export const { increment, decrement, incrementByAmount } =
-  userListStateSlice.actions;
+export const {
+  increment,
+  decrement,
+  incrementByAmount,
+  setEditState,
+  setDeleteState,
+} = userListStateSlice.actions;
 
 export default {
   reducer: userListStateSlice.reducer,

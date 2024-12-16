@@ -1,15 +1,29 @@
-import { FC } from "react";
+import { FC, useCallback } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { IconButton, Stack } from "@mui/material";
 import Tooltip from "@mui/material/Tooltip";
 import { CustomCellRendererProps } from "ag-grid-react";
 
-type UserListActionButtonProps = CustomCellRendererProps & {
-  onEditClick: React.MouseEventHandler<HTMLButtonElement>;
+import { User } from "../userTypes";
+
+type UserListActionButtonProps = CustomCellRendererProps<User> & {
+  onDeleteClick: (data?: Partial<User>) => void;
+  onEditClick: (data?: Partial<User>) => void;
 };
 
-export const UserListActionButton: FC<UserListActionButtonProps> = (props) => {
+export const UserListActionButton: FC<UserListActionButtonProps> = ({
+  onDeleteClick,
+  onEditClick,
+  data,
+}) => {
+  const editClickHandler = useCallback(() => {
+    onEditClick(data);
+  }, [onEditClick, data]);
+
+  const deleteClickHandler = useCallback(() => {
+    onDeleteClick(data);
+  }, [onDeleteClick, data]);
   return (
     <Stack
       direction="row"
@@ -23,8 +37,8 @@ export const UserListActionButton: FC<UserListActionButtonProps> = (props) => {
       <Tooltip title="Edit">
         <IconButton
           aria-label="edit"
-          onClick={props.onEditClick}
-          data-id={props.data.id}
+          onClick={editClickHandler}
+          data-id={data?.id}
         >
           <EditIcon />
         </IconButton>
@@ -33,8 +47,8 @@ export const UserListActionButton: FC<UserListActionButtonProps> = (props) => {
       <Tooltip title="Delete">
         <IconButton
           aria-label="delete"
-          onClick={props.onEditClick}
-          data-id={props.data.id}
+          onClick={deleteClickHandler}
+          data-id={data?.id}
         >
           <DeleteIcon />
         </IconButton>

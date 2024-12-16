@@ -6,6 +6,8 @@ import { useColorScheme } from "@mui/material/styles";
 import { ColDef } from "ag-grid-community";
 import { AgGridReact, AgGridReactProps } from "ag-grid-react"; // React Data Grid Component
 
+import { useAppDispatch } from "../../../store/storeHooks";
+import { setDeleteState, setEditState } from "../userListSlice";
 import { User } from "../userTypes";
 
 import { UserListActionButton } from "./UserListActionButton";
@@ -15,15 +17,23 @@ type UserListTableProps = {} & AgGridReactProps;
 
 export const UserListTable: FC<UserListTableProps> = (props) => {
   const { mode } = useColorScheme();
+  const appDispatch = useAppDispatch();
 
-  const editBtnClickHandler = useCallback<
-    React.MouseEventHandler<HTMLButtonElement>
-  >((event) => {
-    const userId = event.currentTarget.getAttribute("data-id");
-    console.log("edit", { userId });
-  }, []);
+  const editBtnClickHandler = useCallback<(data: Partial<User>) => void>(
+    (data) => {
+      appDispatch(setEditState({ active: true, userEntity: data }));
+    },
+    [appDispatch]
+  );
 
-  const showEditPopup = (userId: number | undefined) => {
+  const deleteBtnClickHandler = useCallback<(data: Partial<User>) => void>(
+    (data) => {
+      appDispatch(setDeleteState({ active: true, userEntity: data }));
+    },
+    [appDispatch]
+  );
+
+  const showEditPopup = (userId?: number) => {
     console.log(userId);
   };
 
@@ -68,13 +78,16 @@ export const UserListTable: FC<UserListTableProps> = (props) => {
       {
         headerName: "Actions",
         cellRenderer: UserListActionButton,
-        cellRendererParams: { onEditClick: editBtnClickHandler },
+        cellRendererParams: {
+          onEditClick: editBtnClickHandler,
+          onDeleteClick: deleteBtnClickHandler,
+        },
         pinned: "right",
         sortable: false,
         maxWidth: 100,
       },
     ],
-    [editBtnClickHandler]
+    [deleteBtnClickHandler, editBtnClickHandler]
   );
 
   return (
@@ -87,6 +100,9 @@ export const UserListTable: FC<UserListTableProps> = (props) => {
         columnDefs={colDefs}
         onRowDoubleClicked={(row) => {
           showEditPopup(row.data?.id);
+        }}
+        onFilterChanged={(event) => {
+          console.log({ event });
         }}
         onModelUpdated={(event) => {
           console.log(event.newData);
