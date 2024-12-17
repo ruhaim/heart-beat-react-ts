@@ -1,50 +1,74 @@
-# React + TypeScript + Vite
+# Heart Beat User List
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Setup instructions
 
-Currently, two official plugins are available:
+### Pre-requisites
+- requires nvm v20 or above
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Project Overview
+- **Name**: `heart-beat-users`
+- **Homepage**: [GitHub Pages](https://ruhaim.github.io/heart-beat-react-ts/)
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Key Features
 
-- Configure the top-level `parserOptions` property like this:
+### Build & Development
+- **Tooling**: Vite for fast development and build processes.
+- **TypeScript Support**: Configured with TypeScript (version ~5.6.2).
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+### Code Quality
+- **Linting**: ESLint configured for TypeScript and React.
+- **Auto-fix**: Runs linting and fixing on staged files via `lint-staged` and Husky pre-commit hooks.
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+### Frontend Stack
+- **UI Libraries**:
+  - **Material-UI**: (`@mui/material`, `@mui/icons-material`).
+  - **Emotion**: Styled-components support (`@emotion/react` and `@emotion/styled`).
+- **Data Handling**:
+  - Redux Toolkit (`@reduxjs/toolkit`, `react-redux`) for state management.
+- **Form Management**:
+  - Formik for form handling with Zod for schema validation.
+- **Visualization**:
+  - `@visx` for data visualization.
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+### Testing & Mocking
+- MirageJS for mocking API requests during development.
+- FakerJS for generating mock data.
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+---
+
+## Scripts
+
+| Script       | Description                                       |
+|--------------|---------------------------------------------------|
+| `dev`        | Runs the development server with Vite.            |
+| `build`      | Builds the project with TypeScript and Vite.      |
+| `lint`       | Lints TypeScript and JavaScript files.            |
+| `lint:fix`   | Automatically fixes linting issues.               |
+| `prepare`    | Installs Husky for pre-commit hooks.              |
+
+---
+
+## Development Dependencies
+
+- **Linting & Code Quality**:
+  - ESLint, `eslint-plugin-react-hooks`, `eslint-plugin-simple-import-sort`
+  - Husky for pre-commit hooks
+  - lint-staged for staged file management
+- **Mocking & Testing**:
+  - MirageJS for API mocking
+  - FakerJS for mock data generation
+- **TypeScript**: TypeScript ~5.6.2
+- **Tooling**: Vite with `@vitejs/plugin-react`
+
+---
+
+## Conclusion
+
+The project is a modern **React** and **TypeScript** application:
+- **Vite** ensures fast performance.
+- **Material-UI** and **Emotion** provide styling solutions.
+- **Redux Toolkit** handles state management.
+- Robust development workflows with **linting**, **testing**, and **pre-commit hooks** ensure code quality and maintainability.
+
