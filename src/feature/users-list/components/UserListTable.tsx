@@ -94,7 +94,6 @@ export const UserListTable: FC<UserListTableProps> = (props) => {
         rowData={props.rowData as User[]}
         columnDefs={colDefs}
         onRowDoubleClicked={(row) => {
-          debugger
           showEditPopup({ userId: row.data?.id, userEntity: row.data });
         }}
         onFilterChanged={() => {
