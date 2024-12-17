@@ -7,7 +7,6 @@ import userApi from "../userApi";
 
 import { UserListTable } from "./UserListTable";
 import { Alert } from "@mui/material";
-import React from "react";
 
 const { useGetUsersQuery } = userApi;
 
