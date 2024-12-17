@@ -14,7 +14,10 @@ const UseEditFormSchema = z.object({
     name: z.string().trim().min(1, { message: "Name is required" }),
     email: z.string().email({ message: "Email is required" }),
     gender: z.union([z.literal("male"), z.literal("female")]),
-    dob: z.string(),
+    dob: z.string().date().refine((value) => {
+        const diff = new Date().getTime() - new Date(value).getTime()
+        return diff > 0
+    }, "Date of birth cannot be a future date"),
     city: z.string().trim().min(1, { message: "City is required" }),
     mobile: z.string().trim().min(1, { message: "Mobile is required" }),
 })
@@ -23,6 +26,7 @@ type RegisterFormSchemaType = z.infer<typeof UseEditFormSchema>;
 type UserEditFormProps = EditUserStateType
 
 export const UserEditForm: FC<UserEditFormProps> = ({ userId, userEntity }) => {
+
     const formik = useFormik<RegisterFormSchemaType>({
         initialValues: {
             id: userId,
@@ -32,10 +36,9 @@ export const UserEditForm: FC<UserEditFormProps> = ({ userId, userEntity }) => {
             gender: "male",
             city: "",
             mobile: "",
-            ...userEntity
+            ...userEntity,
         },
         onSubmit: (values) => {
-            debugger
             alert(JSON.stringify(values));
         },
         validate: withZodSchema(UseEditFormSchema),
@@ -45,6 +48,7 @@ export const UserEditForm: FC<UserEditFormProps> = ({ userId, userEntity }) => {
             formik.errors
         )}\n\n`
     );
+
     return (
         <Container component='section'>
             <Stack component="form" title='Edit User' onSubmit={(ev) => {
@@ -69,6 +73,11 @@ export const UserEditForm: FC<UserEditFormProps> = ({ userId, userEntity }) => {
                     {...formik.getFieldProps("dob")}
                     error={!!formik.errors.dob && formik.touched.dob}
                     helperText={formik.errors.dob}
+                    slotProps={{
+                        htmlInput: {
+                            max: new Date().toISOString().substring(0, 10)
+                        }
+                    }}
                 />
                 <TextField
                     id="email"

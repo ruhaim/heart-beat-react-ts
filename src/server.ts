@@ -20,7 +20,7 @@ const createFakeUser = (): Omit<User, "id"> => {
     gender,
     name: `${firstName} ${lastName}`,
     email: faker.internet.email({ lastName, firstName }),
-    dob: faker.date.birthdate().toDateString(),
+    dob: faker.date.birthdate().toISOString().substring(0, 10),
     city: faker.helpers.arrayElement<string>([
       "California",
       "Singapore",
@@ -28,8 +28,8 @@ const createFakeUser = (): Omit<User, "id"> => {
       "Beijing",
       "Toronto",
     ]),
-    createdOn: faker.date.past({ refDate: updatedOn }).toDateString(),
-    updatedOn: updatedOn.toDateString(),
+    createdOn: faker.date.past({ refDate: updatedOn }).toISOString(),
+    updatedOn: updatedOn.toISOString(),
     mobile: faker.phone.number(),
   };
 };
