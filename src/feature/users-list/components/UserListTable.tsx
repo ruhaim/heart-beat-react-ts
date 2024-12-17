@@ -31,8 +31,6 @@ export const UserListTable: FC<UserListTableProps> = (props) => {
     [appDispatch]
   );
 
-
-
   // Column Definitions: Defines the columns to be displayed.
   const colDefs = useMemo<ColDef<User>[]>(
     () => [

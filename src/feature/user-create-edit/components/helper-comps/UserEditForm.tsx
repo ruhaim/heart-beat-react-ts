@@ -19,9 +19,10 @@ import { setUserEditState } from '../../../users-list/userListSlice';
 import { UserEditFormSchema, UserEditFormSchemaType } from '../../form-schema/UserEditFormSchema';
 
 type UserEditFormProps = EditUserStateType
+const { useUpdateUserMutation } = userApi
 
 export const UserEditForm: FC<UserEditFormProps> = ({ userId, userEntity }) => {
-    const [triggerEditUser, { isLoading, error }] = userApi.useUpdateUserMutation()
+    const [triggerEditUser, { isLoading, error }] = useUpdateUserMutation()
     const dispatch = useAppDispatch()
     const formik = useFormik<UserEditFormSchemaType>({
         initialValues: {
@@ -35,8 +36,10 @@ export const UserEditForm: FC<UserEditFormProps> = ({ userId, userEntity }) => {
             ...userEntity,
         },
         onSubmit: async (values) => {
-            await triggerEditUser(values)
-            dispatch(setUserEditState())
+            const result = await triggerEditUser(values)
+            if (result.data) {
+                dispatch(setUserEditState())
+            }
         },
         validate: withZodSchema(UserEditFormSchema),
     });

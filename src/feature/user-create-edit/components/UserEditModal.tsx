@@ -1,8 +1,8 @@
 import { FC } from "react";
-import { FullScreenModal } from "./helpers/FullScreenModal";
+import { FullScreenModal } from "./helper-comps/FullScreenModal";
 import { useAppDispatch, useAppSelector } from "../../../store/storeHooks";
 import { setUserEditState } from "../../users-list/userListSlice";
-import { UserEditForm } from "./helpers/UserEditForm";
+import { UserEditForm } from "./helper-comps/UserEditForm";
 
 export const UserEditModal: FC = () => {
     const editState = useAppSelector((state) => state.userListState.editState)

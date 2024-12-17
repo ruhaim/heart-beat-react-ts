@@ -78,7 +78,7 @@ export function makeServer({ environment = "test" } = {}) {
         return new Response(200, { "content-id": id }, { id });
       });
 
-      this.delete("/:id", (schema, request) => {
+      this.delete("/users/:id", (schema, request) => {
         const id = request.params?.id;
         try {
           schema.find("user", id)?.destroy();

@@ -20,9 +20,10 @@ import { UserCreateFormSchema, UserCreateFormSchemaType } from '../../form-schem
 
 
 type UserCreateFormProps = CreateUserStateType
+const { useCreateUserMutation } = userApi
 
 export const UserCreateForm: FC<UserCreateFormProps> = ({ userEntity }) => {
-    const [triggerCreateUser, { isLoading, error }] = userApi.useCreateUserMutation()
+    const [triggerCreateUser, { isLoading, error }] = useCreateUserMutation()
     const dispatch = useAppDispatch()
     const formik = useFormik<UserCreateFormSchemaType>({
         initialValues: {
@@ -35,18 +36,13 @@ export const UserCreateForm: FC<UserCreateFormProps> = ({ userEntity }) => {
             ...userEntity,
         },
         onSubmit: async (values) => {
-            try {
-                const rr = await triggerCreateUser(values)
-                console.log({ rr })
+            const result = await triggerCreateUser(values)
+            if (result.data) {
                 dispatch(setUserCreateState())
-            } catch (e) {
-                console.log({ e })
             }
-
         },
         validate: withZodSchema(UserCreateFormSchema),
     });
-    console.log({ data: formik.values, errors: formik.errors })
 
     return (
         <Container component='section'>

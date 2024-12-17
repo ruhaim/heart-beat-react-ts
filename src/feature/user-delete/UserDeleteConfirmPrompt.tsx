@@ -1,4 +1,4 @@
-import React, { FC, PropsWithChildren, ReactNode } from "react";
+import React, { FC, PropsWithChildren, ReactNode, useEffect } from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import { Alert, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
@@ -26,7 +26,7 @@ export const UserDeleteConfirmPrompt: FC<UserDeleteConfirmPromptProps> = ({
   const deleteState = useAppSelector((state) => state.userListState.deleteState)
   const dispatch = useAppDispatch()
 
-  const [triggerDeleteUser, { isLoading, error }] = userApi.useDeleteUserMutation()
+  const [triggerDeleteUser, { isLoading, error, reset }] = userApi.useDeleteUserMutation()
   const userId = deleteState?.userId;
   const userEntity = deleteState?.userEntity;
 
@@ -36,13 +36,26 @@ export const UserDeleteConfirmPrompt: FC<UserDeleteConfirmPromptProps> = ({
     onClose?.()
   };
   const handleActionButtonClick = async () => {
-    if (userId) {
-      await triggerDeleteUser({ id: userId })
-      debugger
+    if (!userId) {
+      return onClose?.();
     }
-    dispatch(setUserDeleteState())
-    return onClose?.();
+    const result = await triggerDeleteUser({ id: userId })
+    if (result.data) {
+      dispatch(setUserDeleteState())
+      return onClose?.();
+
+    }
+
   }
+
+
+  useEffect(() => {
+    if (userId) {
+
+      reset()
+    }
+  }, [userId])
+
   return (
     <React.Fragment>
       <Dialog
