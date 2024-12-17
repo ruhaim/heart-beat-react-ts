@@ -95,10 +95,10 @@ export const UserListTable: FC<UserListTableProps> = (props) => {
         onRowDoubleClicked={(row) => {
           showEditPopup(row.data?.id);
         }}
-        onFilterChanged={(event) => {
+        onFilterChanged={() => {
           // console.log({ event });
         }}
-        onModelUpdated={(event) => {
+        onModelUpdated={() => {
           // console.log(event.newData);
         }}
         loadingOverlayComponent={UserListLoadingOverlay}
