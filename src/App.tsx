@@ -21,9 +21,9 @@ function App() {
       <AppBar position="fixed">
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            HeartBeat
+            Heartpace
           </Typography>
-          <Button
+          <Button color="inherit"
             onClick={() => {
               dispatch(setUserCreateState({}));
             }}

@@ -102,6 +102,7 @@ export const UserListTable: FC<UserListTableProps> = (props) => {
         onModelUpdated={() => {
           // console.log(event.newData);
         }}
+        suppressDragLeaveHidesColumns={true}
         loadingOverlayComponent={UserListLoadingOverlay}
         {...props}
       />
