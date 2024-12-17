@@ -78,6 +78,7 @@
   - Automatically updates the data model after every create/edit operation done by tages defined in RTK query
   - Visual Indication for api status (loading / error / success)
   - Redux state to hold the CRUD status of the user
+  - Accessibilty of form components with aria labelling and proper html semantics when needed
 - **Dark Mode Toggle**
   - Ability to toggle the dark mode in browser.
   - The ag-grid is specially themed to handle dark mode via mui,
