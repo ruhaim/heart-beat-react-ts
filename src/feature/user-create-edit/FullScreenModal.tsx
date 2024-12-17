@@ -4,19 +4,9 @@ import AppBar from "@mui/material/AppBar";
 import Button from "@mui/material/Button";
 import Dialog, { DialogProps } from "@mui/material/Dialog";
 import IconButton from "@mui/material/IconButton";
-import Slide from "@mui/material/Slide";
 import Toolbar from "@mui/material/Toolbar";
-import { TransitionProps } from "@mui/material/transitions";
 import Typography from "@mui/material/Typography";
-
-const Transition = React.forwardRef(function Transition(
-  props: TransitionProps & {
-    children: React.ReactElement<unknown>;
-  },
-  ref: React.Ref<unknown>
-) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
+import { TransitionUp } from "../../theme/transition/TransitionUp";
 
 type FullScreenModalProps = {
   onClose?: () => void
@@ -51,7 +41,7 @@ export const FullScreenModal: FC<PropsWithChildren<FullScreenModalProps>> = ({
         fullScreen
         open={open}
         onClose={handleClose}
-        TransitionComponent={Transition}
+        TransitionComponent={TransitionUp}
       >
         <AppBar sx={{ position: "relative" }}>
           <Toolbar>

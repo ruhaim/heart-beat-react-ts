@@ -1,22 +1,13 @@
 import React, { FC, PropsWithChildren, ReactNode } from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
-import Slide from "@mui/material/Slide";
-import { TransitionProps } from "@mui/material/transitions";
 import { Alert, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
-import { DeleteUserStateType } from "../users-list/userTypes";
 import { useAppDispatch, useAppSelector } from "../../store/storeHooks";
 import { setUserDeleteState } from "../users-list/userListSlice";
 import userApi from "../users-list/userApi";
+import { TransitionUp } from "../../theme/transition/TransitionUp";
 
-const Transition = React.forwardRef(function Transition(
-  props: TransitionProps & {
-    children: React.ReactElement<unknown>;
-  },
-  ref: React.Ref<unknown>
-) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
+
 
 type UserDeleteConfirmPromptProps = {
   onClose?: () => void
@@ -57,7 +48,7 @@ export const UserDeleteConfirmPrompt: FC<UserDeleteConfirmPromptProps> = ({
       <Dialog
         open={open}
         onClose={handleClose}
-        TransitionComponent={Transition}
+        TransitionComponent={TransitionUp}
       >
         <DialogTitle>{title}</DialogTitle>
         <DialogContent>

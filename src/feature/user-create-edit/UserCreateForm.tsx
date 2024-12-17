@@ -3,7 +3,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { useFormik } from "formik";
 import { withZodSchema } from "formik-validator-zod";
-import { z } from "zod";
+
 import { FC } from 'react';
 import { CreateUserStateType } from '../users-list/userTypes';
 import Stack from '@mui/material/Stack';
@@ -16,26 +16,15 @@ import MenuItem from '@mui/material/MenuItem';
 import { FormControl, InputLabel } from '@mui/material';
 import { setUserCreateState } from '../users-list/userListSlice';
 import { useAppDispatch } from '../../store/storeHooks';
+import { UserCreateFormSchema, UserCreateFormSchemaType } from './form-schema/UserCreateFormSchema';
 
-const UseEditFormSchema = z.object({
-    name: z.string().trim().min(1, { message: "Name is required" }),
-    email: z.string().email({ message: "Email is required" }),
-    gender: z.union([z.literal("male"), z.literal("female")]),
-    dob: z.string().date().refine((value) => {
-        const diff = new Date().getTime() - new Date(value).getTime()
-        return diff > 0
-    }, "Date of birth cannot be a future date"),
-    city: z.string().trim().min(1, { message: "City is required" }),
-    mobile: z.string().trim().min(1, { message: "Mobile is required" }),
-})
 
-type RegisterFormSchemaType = z.infer<typeof UseEditFormSchema>;
 type UserCreateFormProps = CreateUserStateType
 
 export const UserCreateForm: FC<UserCreateFormProps> = ({ userEntity }) => {
     const [triggerCreateUser, { isLoading, error }] = userApi.useCreateUserMutation()
     const dispatch = useAppDispatch()
-    const formik = useFormik<RegisterFormSchemaType>({
+    const formik = useFormik<UserCreateFormSchemaType>({
         initialValues: {
             name: "",
             dob: "",
@@ -55,7 +44,7 @@ export const UserCreateForm: FC<UserCreateFormProps> = ({ userEntity }) => {
             }
 
         },
-        validate: withZodSchema(UseEditFormSchema),
+        validate: withZodSchema(UserCreateFormSchema),
     });
     console.log({ data: formik.values, errors: formik.errors })
 

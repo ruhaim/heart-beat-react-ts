@@ -3,7 +3,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { useFormik } from "formik";
 import { withZodSchema } from "formik-validator-zod";
-import { z } from "zod";
+
 import { FC } from 'react';
 import { EditUserStateType } from '../users-list/userTypes';
 import Stack from '@mui/material/Stack';
@@ -16,27 +16,14 @@ import MenuItem from '@mui/material/MenuItem';
 import { FormControl, InputLabel } from '@mui/material';
 import { useAppDispatch } from '../../store/storeHooks';
 import { setUserEditState } from '../users-list/userListSlice';
+import { UserEditFormSchema, UserEditFormSchemaType } from './form-schema/UserEditFormSchema';
 
-const UseEditFormSchema = z.object({
-    id: z.string(),
-    name: z.string().trim().min(1, { message: "Name is required" }),
-    email: z.string().email({ message: "Email is required" }),
-    gender: z.union([z.literal("male"), z.literal("female")]),
-    dob: z.string().date().refine((value) => {
-        const diff = new Date().getTime() - new Date(value).getTime()
-        return diff > 0
-    }, "Date of birth cannot be a future date"),
-    city: z.string().trim().min(1, { message: "City is required" }),
-    mobile: z.string().trim().min(1, { message: "Mobile is required" }),
-})
-
-type RegisterFormSchemaType = z.infer<typeof UseEditFormSchema>;
 type UserEditFormProps = EditUserStateType
 
 export const UserEditForm: FC<UserEditFormProps> = ({ userId, userEntity }) => {
     const [triggerEditUser, { isLoading, error }] = userApi.useUpdateUserMutation()
     const dispatch = useAppDispatch()
-    const formik = useFormik<RegisterFormSchemaType>({
+    const formik = useFormik<UserEditFormSchemaType>({
         initialValues: {
             id: userId,
             name: "",
@@ -51,7 +38,7 @@ export const UserEditForm: FC<UserEditFormProps> = ({ userId, userEntity }) => {
             await triggerEditUser(values)
             dispatch(setUserEditState())
         },
-        validate: withZodSchema(UseEditFormSchema),
+        validate: withZodSchema(UserEditFormSchema),
     });
 
 
