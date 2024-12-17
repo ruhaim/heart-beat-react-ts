@@ -69,9 +69,16 @@ export function makeServer({ environment = "test" } = {}) {
       this.patch("/users/:id", (schema: AppSchema, request: Request) => {
         const id = request.params?.id;
         try {
-          const attrs = JSON.parse(request.requestBody);
-          const user = schema.find("user", id);
-          user?.update("id", attrs);
+          const attrs: Omit<User, 'id'> = JSON.parse(request.requestBody);
+          const user = schema.find("user", id)
+
+          Object.keys(attrs).forEach((key) => {
+            user?.update(key, attrs[key]);
+          });
+
+          user?.save()
+
+          debugger
         } catch (e) {
           return new Response(400, {}, { errors: [e] });
         }
