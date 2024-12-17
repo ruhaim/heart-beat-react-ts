@@ -15,7 +15,7 @@ export type UserListResponse = {
 };
 
 export type CreateUserStateType = {
-  userEntity?: Omit<Partial<User>, 'id'>;
+  userEntity?: Omit<Partial<User>, 'id' | 'createdOn' | 'updatedOn'>;
 }
 export type EditUserStateType = {
   userId: User['id']

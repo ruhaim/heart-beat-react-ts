@@ -1,4 +1,4 @@
-import React, { FC, PropsWithChildren } from "react";
+import React, { FC, PropsWithChildren, ReactNode } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import AppBar from "@mui/material/AppBar";
 import Button from "@mui/material/Button";
@@ -24,6 +24,7 @@ type FullScreenModalProps = {
   actionBtnLabel?: string
   open: boolean
   onActionButtonClick?: () => void;
+  actionBtns?: ReactNode
 
 } & DialogProps
 
@@ -33,6 +34,7 @@ export const FullScreenModal: FC<PropsWithChildren<FullScreenModalProps>> = ({
   title,
   actionBtnLabel = "Save",
   open,
+  actionBtns,
   onActionButtonClick }) => {
   const handleClose = () => {
     onClose?.()
@@ -64,13 +66,13 @@ export const FullScreenModal: FC<PropsWithChildren<FullScreenModalProps>> = ({
             <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
               {title}
             </Typography>
-            <Button autoFocus color="inherit" onClick={handleActionButtonClick}>
+            {actionBtns || <Button autoFocus color="inherit" onClick={handleActionButtonClick}>
               {actionBtnLabel}
-            </Button>
+            </Button>}
           </Toolbar>
         </AppBar>
         {children}
       </Dialog>
-    </React.Fragment>
+    </React.Fragment >
   );
 };

@@ -5,7 +5,7 @@ import { useFormik } from "formik";
 import { withZodSchema } from "formik-validator-zod";
 import { z } from "zod";
 import { FC } from 'react';
-import { EditUserStateType } from '../users-list/userTypes';
+import { CreateUserStateType } from '../users-list/userTypes';
 import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';
 import userApi from '../users-list/userApi';
@@ -14,11 +14,10 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import { FormControl, InputLabel } from '@mui/material';
+import { setUserCreateState, setUserEditState } from '../users-list/userListSlice';
 import { useAppDispatch } from '../../store/storeHooks';
-import { setUserEditState } from '../users-list/userListSlice';
 
 const UseEditFormSchema = z.object({
-    id: z.string(),
     name: z.string().trim().min(1, { message: "Name is required" }),
     email: z.string().email({ message: "Email is required" }),
     gender: z.union([z.literal("male"), z.literal("female")]),
@@ -31,14 +30,13 @@ const UseEditFormSchema = z.object({
 })
 
 type RegisterFormSchemaType = z.infer<typeof UseEditFormSchema>;
-type UserEditFormProps = EditUserStateType
+type UserCreateFormProps = CreateUserStateType
 
-export const UserEditForm: FC<UserEditFormProps> = ({ userId, userEntity }) => {
-    const [triggerEditPost, { isLoading, error }] = userApi.useUpdateUserMutation()
+export const UserCreateForm: FC<UserCreateFormProps> = ({ userEntity }) => {
+    const [triggerCreatePost, { isLoading, error }] = userApi.useCreateUserMutation()
     const dispatch = useAppDispatch()
     const formik = useFormik<RegisterFormSchemaType>({
         initialValues: {
-            id: userId,
             name: "",
             dob: "",
             email: "",
@@ -48,30 +46,26 @@ export const UserEditForm: FC<UserEditFormProps> = ({ userId, userEntity }) => {
             ...userEntity,
         },
         onSubmit: async (values) => {
-            await triggerEditPost(values)
-            dispatch(setUserEditState())
+            try {
+                const rr = await triggerCreatePost(values)
+                console.log({ rr })
+                dispatch(setUserCreateState())
+            } catch (e) {
+                console.log({ e })
+            }
+
         },
         validate: withZodSchema(UseEditFormSchema),
     });
-
+    console.log({ data: formik.values, errors: formik.errors })
 
     return (
         <Container component='section'>
-
             <Stack component="form" title='Edit User' onSubmit={(ev) => {
                 return formik.handleSubmit(ev)
             }} spacing={{ xs: 2, sm: 3 }}>
-                <Typography variant="h6">Edit User</Typography>
+                <Typography variant="h6">Create User</Typography>
                 {error && <Alert severity="error">Ooops, something went wrong</Alert>}
-                <TextField
-                    id="id"
-                    type="text"
-                    label="User Id"
-                    placeholder="User Id"
-                    fullWidth
-                    {...formik.getFieldProps("id")}
-                    disabled
-                />
                 <TextField
                     id="name"
                     type="text"
@@ -90,13 +84,14 @@ export const UserEditForm: FC<UserEditFormProps> = ({ userId, userEntity }) => {
                     {...formik.getFieldProps("dob")}
                     error={!!formik.errors.dob && formik.touched.dob}
                     helperText={formik.errors.dob}
+
                     slotProps={{
                         inputLabel: {
                             shrink: true
                         },
                         htmlInput: {
                             max: new Date().toISOString().substring(0, 10),
-                            placeholder: ""
+
                         }
                     }}
                 />
@@ -126,7 +121,7 @@ export const UserEditForm: FC<UserEditFormProps> = ({ userId, userEntity }) => {
                 <TextField
                     id="mobile"
                     type="tel"
-                    label="Mobile"
+                    label="Telephone"
                     placeholder=""
                     fullWidth
                     {...formik.getFieldProps("mobile")}
@@ -149,6 +144,7 @@ export const UserEditForm: FC<UserEditFormProps> = ({ userId, userEntity }) => {
                 {isLoading ? <CircularProgress /> : <Button variant="contained" type="submit" fullWidth disabled={isLoading || !formik.dirty}>
                     Submit
                 </Button>}
+
             </Stack>
         </Container >
     );

@@ -10,7 +10,7 @@ const userApi = apiSlice.injectEndpoints({
     }),
     createUser: build.mutation<
       User,
-      Omit<User, "id" | "createdOn" | "updateOn">
+      Partial<Omit<User, "id" | "createdOn" | "updateOn">>
     >({
       query: ({ ...patch }) => ({
         url: `users`,

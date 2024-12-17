@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from "../../../store/storeHooks";
 import { FullScreenModal } from "../../user-create-edit/FullScreenModal";
 import { UserEditForm } from "../../user-create-edit/UserEditForm";
 import { setUserCreateState, setUserEditState } from "../userListSlice";
+import { UserCreateForm } from "../../user-create-edit/UserCreateForm";
 
 const { useGetUsersQuery } = userApi;
 
@@ -18,13 +19,13 @@ export const UserDashboard: FC = () => {
 
   return (
     <>
-      <FullScreenModal open={!!editState || false} onClose={() => {
+      <FullScreenModal open={!!editState || false} actionBtns={<></>} onClose={() => {
         appDispatch(setUserEditState());
       }}>
         {editState && <UserEditForm userId={editState.userId} userEntity={editState.userEntity} />}
       </FullScreenModal>
-      <FullScreenModal open={!!createState || false} onClose={() => { setUserCreateState() }}>
-        {editState && <UserEditForm userId={editState.userId} userEntity={editState.userEntity} />}
+      <FullScreenModal open={!!createState || false} actionBtns={<></>} onClose={() => { appDispatch(setUserCreateState()) }}>
+        {createState && <UserCreateForm userEntity={createState.userEntity} />}
       </FullScreenModal>
       <UserListTable rowData={userList?.users || []} loading={isLoading} />
     </>
