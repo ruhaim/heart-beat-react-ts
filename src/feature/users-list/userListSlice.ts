@@ -1,8 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import userApi from "./userApi";
-import { CreateUserStateType, DeleteUserStateType, EditUserStateType, User } from "./userTypes";
-
+import {
+  CreateUserStateType,
+  DeleteUserStateType,
+  EditUserStateType,
+  User,
+} from "./userTypes";
 
 interface UserListState {
   value: number;
@@ -54,12 +58,8 @@ export const userListStateSlice = createSlice({
   },
 });
 
-export const {
-
-  setUserCreateState,
-  setUserDeleteState,
-  setUserEditState
-} = userListStateSlice.actions;
+export const { setUserCreateState, setUserDeleteState, setUserEditState } =
+  userListStateSlice.actions;
 
 export default {
   reducer: userListStateSlice.reducer,

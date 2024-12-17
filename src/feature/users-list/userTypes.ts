@@ -15,14 +15,14 @@ export type UserListResponse = {
 };
 
 export type CreateUserStateType = {
-  userEntity?: Omit<Partial<User>, 'id' | 'createdOn' | 'updatedOn'>;
-}
+  userEntity?: Omit<Partial<User>, "id" | "createdOn" | "updatedOn">;
+};
 export type EditUserStateType = {
-  userId: User['id']
-  userEntity?: Omit<Partial<User>, 'id'>;
-}
+  userId: User["id"];
+  userEntity?: Omit<Partial<User>, "id">;
+};
 
 export type DeleteUserStateType = {
-  userId: User['id'],
-  userEntity?: Omit<Partial<User>, 'id'>;
-}
+  userId: User["id"];
+  userEntity?: Omit<Partial<User>, "id">;
+};

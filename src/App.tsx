@@ -8,14 +8,14 @@ import {
 } from "@mui/material";
 
 import { UserDashboard } from "./feature/users-list/components/UserDashboard";
+import { setUserCreateState } from "./feature/users-list/userListSlice";
 import { CityDistributionChart } from "./feature/users-vis/components/CityDistributionChart";
 import { GenderDistributionChart } from "./feature/users-vis/components/GenderDistributionChart";
-import { DarkModeToggler } from "./theme/DarkModeToggler";
-import { setUserCreateState } from "./feature/users-list/userListSlice";
 import { useAppDispatch } from "./store/storeHooks";
+import { DarkModeToggler } from "./theme/DarkModeToggler";
 
 function App() {
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
   return (
     <>
       <AppBar position="fixed">
@@ -23,9 +23,13 @@ function App() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             HeartBeat
           </Typography>
-          <Button onClick={() => {
-            dispatch(setUserCreateState({}))
-          }}>Add New User</Button>
+          <Button
+            onClick={() => {
+              dispatch(setUserCreateState({}));
+            }}
+          >
+            Add New User
+          </Button>
           <DarkModeToggler />
         </Toolbar>
       </AppBar>

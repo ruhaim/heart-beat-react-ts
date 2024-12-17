@@ -2,16 +2,15 @@ import { apiSlice } from "../../store/apiSlice";
 
 import type { User, UserListResponse } from "./userTypes";
 
-const apiWithTags = apiSlice.enhanceEndpoints({ addTagTypes: ['User'] })
+const apiWithTags = apiSlice.enhanceEndpoints({ addTagTypes: ["User"] });
 
 const userApi = apiWithTags.injectEndpoints({
   overrideExisting: false,
 
-
   endpoints: (build) => ({
     getUsers: build.query<UserListResponse, void>({
       query: () => ({ url: "users" }),
-      providesTags: ['User']
+      providesTags: ["User"],
     }),
     createUser: build.mutation<
       User,
@@ -22,8 +21,7 @@ const userApi = apiWithTags.injectEndpoints({
         method: "POST",
         body: patch,
       }),
-      invalidatesTags: ['User']
-
+      invalidatesTags: ["User"],
     }),
     updateUser: build.mutation<User, Partial<User> & Pick<User, "id">>({
       query: ({ id, ...patch }) => ({
@@ -31,14 +29,14 @@ const userApi = apiWithTags.injectEndpoints({
         method: "PATCH",
         body: patch,
       }),
-      invalidatesTags: ['User']
+      invalidatesTags: ["User"],
     }),
     deleteUser: build.mutation<string, Pick<User, "id">>({
       query: ({ id }) => ({
         url: `users/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: ['User']
+      invalidatesTags: ["User"],
     }),
   }),
 });

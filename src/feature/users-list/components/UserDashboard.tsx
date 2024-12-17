@@ -1,11 +1,11 @@
 import { FC } from "react";
 
+import { UserCreateModal } from "../../user-create-edit/components/UserCreateModal";
+import { UserEditModal } from "../../user-create-edit/components/UserEditModal";
+import { UserDeleteConfirmPrompt } from "../../user-delete/UserDeleteConfirmPrompt";
 import userApi from "../userApi";
 
 import { UserListTable } from "./UserListTable";
-import { UserDeleteConfirmPrompt } from "../../user-delete/UserDeleteConfirmPrompt";
-import { UserCreateModal } from "../../user-create-edit/components/UserCreateModal";
-import { UserEditModal } from "../../user-create-edit/components/UserEditModal";
 
 const { useGetUsersQuery } = userApi;
 
