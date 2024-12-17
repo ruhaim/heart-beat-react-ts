@@ -20,6 +20,7 @@ export const UserListTable: FC<UserListTableProps> = (props) => {
   const appDispatch = useAppDispatch();
 
   const showEditPopup = (data: EditUserStateType) => {
+    debugger
     appDispatch(setUserEditState(data));
   };
   const editBtnClickHandler = showEditPopup
@@ -90,10 +91,11 @@ export const UserListTable: FC<UserListTableProps> = (props) => {
       style={{ height: "100%" }} // the Data Grid will fill the size of the parent container
     >
       <AgGridReact
-        rowData={props.rowData}
+        rowData={props.rowData as User[]}
         columnDefs={colDefs}
         onRowDoubleClicked={(row) => {
-          showEditPopup(row.data?.id);
+          debugger
+          showEditPopup({ userId: row.data?.id, userEntity: row.data });
         }}
         onFilterChanged={() => {
           // console.log({ event });
