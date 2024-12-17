@@ -23,5 +23,6 @@ export type EditUserStateType = {
 }
 
 export type DeleteUserStateType = {
-  userId: User['id']
+  userId: User['id'],
+  userEntity?: Omit<Partial<User>, 'id'>;
 }

@@ -34,7 +34,7 @@ type RegisterFormSchemaType = z.infer<typeof UseEditFormSchema>;
 type UserEditFormProps = EditUserStateType
 
 export const UserEditForm: FC<UserEditFormProps> = ({ userId, userEntity }) => {
-    const [triggerEditPost, { isLoading, error }] = userApi.useUpdateUserMutation()
+    const [triggerEditUser, { isLoading, error }] = userApi.useUpdateUserMutation()
     const dispatch = useAppDispatch()
     const formik = useFormik<RegisterFormSchemaType>({
         initialValues: {
@@ -48,7 +48,7 @@ export const UserEditForm: FC<UserEditFormProps> = ({ userId, userEntity }) => {
             ...userEntity,
         },
         onSubmit: async (values) => {
-            await triggerEditPost(values)
+            await triggerEditUser(values)
             dispatch(setUserEditState())
         },
         validate: withZodSchema(UseEditFormSchema),

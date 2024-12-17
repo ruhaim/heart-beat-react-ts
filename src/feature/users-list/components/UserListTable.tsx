@@ -8,7 +8,7 @@ import { AgGridReact, AgGridReactProps } from "ag-grid-react"; // React Data Gri
 
 import { useAppDispatch } from "../../../store/storeHooks";
 import { setUserDeleteState, setUserEditState } from "../userListSlice";
-import { EditUserStateType, User } from "../userTypes";
+import { DeleteUserStateType, EditUserStateType, User } from "../userTypes";
 
 import { UserListActionButton } from "./UserListActionButton";
 import { UserListLoadingOverlay } from "./UserListLoadingOverlay";
@@ -22,16 +22,11 @@ export const UserListTable: FC<UserListTableProps> = (props) => {
   const showEditPopup = (data: EditUserStateType) => {
     appDispatch(setUserEditState(data));
   };
-  const editBtnClickHandler = useCallback<(data: EditUserStateType) => void>(
-    (data) => {
-      showEditPopup(data)
-    },
-    [appDispatch]
-  );
+  const editBtnClickHandler = showEditPopup
 
-  const deleteBtnClickHandler = useCallback<(data: User) => void>(
+  const deleteBtnClickHandler = useCallback<(data: DeleteUserStateType) => void>(
     (data) => {
-      appDispatch(setUserDeleteState({ userId: data.id }));
+      appDispatch(setUserDeleteState(data));
     },
     [appDispatch]
   );

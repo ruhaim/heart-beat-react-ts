@@ -25,7 +25,7 @@ export const UserListActionButton: FC<UserListActionButtonProps> = ({
 
   const deleteClickHandler = useCallback(() => {
     if (data) {
-      onDeleteClick({ userId: data.id });
+      onDeleteClick({ userId: data.id, userEntity: data });
     }
   }, [onDeleteClick, data]);
   return (

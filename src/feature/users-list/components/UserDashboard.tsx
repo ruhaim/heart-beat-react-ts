@@ -8,25 +8,20 @@ import { FullScreenModal } from "../../user-create-edit/FullScreenModal";
 import { UserEditForm } from "../../user-create-edit/UserEditForm";
 import { setUserCreateState, setUserEditState } from "../userListSlice";
 import { UserCreateForm } from "../../user-create-edit/UserCreateForm";
+import { UserDeleteConfirmPrompt } from "../../user-delete/UserDeleteConfirmPrompt";
+import { UserCreateModal } from "../../user-create-edit/UserCreateModal";
+import { UserEditModal } from "../../user-create-edit/UserEditModal";
 
 const { useGetUsersQuery } = userApi;
 
 export const UserDashboard: FC = () => {
-  const editState = useAppSelector((state) => state.userListState.editState)
-  const createState = useAppSelector((state) => state.userListState.createState)
-  const appDispatch = useAppDispatch()
   const { isLoading, data: userList } = useGetUsersQuery();
 
   return (
     <>
-      <FullScreenModal open={!!editState || false} actionBtns={<></>} onClose={() => {
-        appDispatch(setUserEditState());
-      }}>
-        {editState && <UserEditForm userId={editState.userId} userEntity={editState.userEntity} />}
-      </FullScreenModal>
-      <FullScreenModal open={!!createState || false} actionBtns={<></>} onClose={() => { appDispatch(setUserCreateState()) }}>
-        {createState && <UserCreateForm userEntity={createState.userEntity} />}
-      </FullScreenModal>
+      <UserEditModal />
+      <UserCreateModal />
+      <UserDeleteConfirmPrompt />
       <UserListTable rowData={userList?.users || []} loading={isLoading} />
     </>
   );

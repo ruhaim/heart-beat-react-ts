@@ -14,7 +14,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import { FormControl, InputLabel } from '@mui/material';
-import { setUserCreateState, setUserEditState } from '../users-list/userListSlice';
+import { setUserCreateState } from '../users-list/userListSlice';
 import { useAppDispatch } from '../../store/storeHooks';
 
 const UseEditFormSchema = z.object({
@@ -33,7 +33,7 @@ type RegisterFormSchemaType = z.infer<typeof UseEditFormSchema>;
 type UserCreateFormProps = CreateUserStateType
 
 export const UserCreateForm: FC<UserCreateFormProps> = ({ userEntity }) => {
-    const [triggerCreatePost, { isLoading, error }] = userApi.useCreateUserMutation()
+    const [triggerCreateUser, { isLoading, error }] = userApi.useCreateUserMutation()
     const dispatch = useAppDispatch()
     const formik = useFormik<RegisterFormSchemaType>({
         initialValues: {
@@ -47,7 +47,7 @@ export const UserCreateForm: FC<UserCreateFormProps> = ({ userEntity }) => {
         },
         onSubmit: async (values) => {
             try {
-                const rr = await triggerCreatePost(values)
+                const rr = await triggerCreateUser(values)
                 console.log({ rr })
                 dispatch(setUserCreateState())
             } catch (e) {
