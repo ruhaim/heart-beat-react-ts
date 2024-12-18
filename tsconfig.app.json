@@ -16,14 +16,6 @@
     "moduleDetection": "force",
     "noEmit": true,
     "jsx": "react-jsx",
-    "compilerOptions": {
-      "types": [
-        "vitest/globals",
-        "@testing-library/jest-dom"
-      ],
-      "esModuleInterop": true,
-      "skipLibCheck": true
-    },
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,

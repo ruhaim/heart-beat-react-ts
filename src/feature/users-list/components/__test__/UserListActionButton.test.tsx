@@ -1,4 +1,4 @@
-import { fireEvent, screen, waitFor, waitForElementToBeRemoved } from '@testing-library/react';
+import { fireEvent, screen, waitFor } from '@testing-library/react';
 
 import fixture from '../../../../__test__/fixtures/users.3.fixtures.json'
 import { renderWithProviders, setupTestServer } from "../../../../__test__/setup";
