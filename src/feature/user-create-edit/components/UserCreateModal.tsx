@@ -1,10 +1,11 @@
-import { FC } from "react";
+import { FC, Suspense, lazy } from "react";
 
 import { useAppDispatch, useAppSelector } from "../../../store/storeHooks";
 import { setUserCreateState } from "../../users-list/userListSlice";
 
 import { FullScreenModal } from "./helper-comps/FullScreenModal";
-import { UserCreateForm } from "./helper-comps/UserCreateForm";
+
+const UserCreateForm = lazy(() => import('./helper-comps/UserCreateForm'));
 
 export const UserCreateModal: FC = () => {
   const createState = useAppSelector(
@@ -20,7 +21,11 @@ export const UserCreateModal: FC = () => {
         appDispatch(setUserCreateState());
       }}
     >
-      {createState && <UserCreateForm userEntity={createState.userEntity} />}
+      {createState &&
+        <Suspense>
+          <UserCreateForm userEntity={createState.userEntity} />
+        </Suspense>
+      }
     </FullScreenModal>
   );
 };

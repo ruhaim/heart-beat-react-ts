@@ -24,7 +24,7 @@ import {
 type UserCreateFormProps = CreateUserStateType;
 const { useCreateUserMutation } = userApi;
 
-export const UserCreateForm: FC<UserCreateFormProps> = ({ userEntity }) => {
+const UserCreateForm: FC<UserCreateFormProps> = ({ userEntity }) => {
   const [triggerCreateUser, { isLoading, error }] = useCreateUserMutation();
   const dispatch = useAppDispatch();
   const formik = useFormik<UserCreateFormSchemaType>({
@@ -147,3 +147,5 @@ export const UserCreateForm: FC<UserCreateFormProps> = ({ userEntity }) => {
     </Container>
   );
 };
+
+export default UserCreateForm;

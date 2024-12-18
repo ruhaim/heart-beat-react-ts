@@ -24,7 +24,7 @@ import {
 type UserEditFormProps = EditUserStateType;
 const { useUpdateUserMutation } = userApi;
 
-export const UserEditForm: FC<UserEditFormProps> = ({ userId, userEntity }) => {
+const UserEditForm: FC<UserEditFormProps> = ({ userId, userEntity }) => {
   const [triggerEditUser, { isLoading, error }] = useUpdateUserMutation();
   const dispatch = useAppDispatch();
   const formik = useFormik<UserEditFormSchemaType>({
@@ -158,3 +158,5 @@ export const UserEditForm: FC<UserEditFormProps> = ({ userId, userEntity }) => {
     </Container>
   );
 };
+
+export default UserEditForm;
