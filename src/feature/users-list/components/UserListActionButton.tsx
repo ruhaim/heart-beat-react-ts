@@ -43,6 +43,7 @@ export const UserListActionButton: FC<UserListActionButtonProps> = ({
           aria-label="edit"
           onClick={editClickHandler}
           data-id={data?.id}
+          data-testid={`user-edit-btn-${data?.id}`}
         >
           <EditIcon />
         </IconButton>
@@ -53,6 +54,7 @@ export const UserListActionButton: FC<UserListActionButtonProps> = ({
           aria-label="delete"
           onClick={deleteClickHandler}
           data-id={data?.id}
+          data-testid={`user-delete-btn-${data?.id}`}
         >
           <DeleteIcon />
         </IconButton>

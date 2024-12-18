@@ -48,7 +48,7 @@ export const UserEditForm: FC<UserEditFormProps> = ({ userId, userEntity }) => {
   });
 
   return (
-    <Container component="section">
+    <Container component="section" >
       <Stack
         component="form"
         title="Edit User"
@@ -56,6 +56,7 @@ export const UserEditForm: FC<UserEditFormProps> = ({ userId, userEntity }) => {
           return formik.handleSubmit(ev);
         }}
         spacing={{ xs: 1, sm: 2 }}
+        data-testid={`user-edit-form-${userId}`}
       >
         <Typography variant="h6">Edit User</Typography>
         {error && <Alert severity="error">Ooops, something went wrong</Alert>}

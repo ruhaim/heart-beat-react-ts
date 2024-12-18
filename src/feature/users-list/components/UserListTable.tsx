@@ -20,7 +20,6 @@ export const UserListTable: FC<UserListTableProps> = (props) => {
   const appDispatch = useAppDispatch();
 
   const showEditPopup = (data: EditUserStateType) => {
-    debugger
     appDispatch(setUserEditState(data));
   };
   const editBtnClickHandler = showEditPopup
@@ -55,6 +54,7 @@ export const UserListTable: FC<UserListTableProps> = (props) => {
         filter: "agDateColumnFilter",
         width: 100,
         minWidth: 80,
+        headerName: "Date of Birth",
         valueFormatter: ({ value }) => {
           if (!value) {
             return value;
@@ -89,6 +89,7 @@ export const UserListTable: FC<UserListTableProps> = (props) => {
     <div
       className={`ag-theme-material${mode === "dark" ? "-dark" : ""}`} // applying the Data Grid theme
       style={{ height: "100%" }} // the Data Grid will fill the size of the parent container
+      data-testid="scrollable-grid"
     >
       <AgGridReact
         rowData={props.rowData as User[]}

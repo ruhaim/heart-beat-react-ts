@@ -34,17 +34,21 @@ const createFakeUser = (): Omit<User, "id"> => {
   };
 };
 
-export const factories = {};
+const factories = {};
 type AppRegistry = Registry<typeof models, typeof factories>;
 type AppSchema = Schema<AppRegistry>;
 
-export function makeServer({ environment = "test" } = {}) {
+export type MakeServerParams = {
+  environment?: string,
+}
+
+export function makeServer({ environment = "test" }: MakeServerParams = {}) {
   const server = createServer({
     environment,
     models,
     factories,
     seeds(server) {
-      Array.from({ length: 1000 }, () => {
+      Array.from({ length: 2000 }, () => {
         server.create("user", createFakeUser());
       });
     },

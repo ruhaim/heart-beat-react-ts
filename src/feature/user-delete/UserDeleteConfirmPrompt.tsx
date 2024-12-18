@@ -63,6 +63,7 @@ export const UserDeleteConfirmPrompt: FC<UserDeleteConfirmPromptProps> = ({
         open={open}
         onClose={handleClose}
         TransitionComponent={TransitionUp}
+        data-testid={`user-delete-confirm-${userId}`}
       >
         <DialogTitle>{title}</DialogTitle>
         <DialogContent>

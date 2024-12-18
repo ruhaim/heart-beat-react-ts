@@ -50,11 +50,12 @@ export const UserCreateForm: FC<UserCreateFormProps> = ({ userEntity }) => {
     <Container component="section">
       <Stack
         component="form"
-        title="Edit User"
+        title="Create New User"
         onSubmit={(ev) => {
           return formik.handleSubmit(ev);
         }}
         spacing={{ xs: 1, sm: 2 }}
+        data-testid={`user-create-form`}
       >
         <Typography variant="h6">Create User</Typography>
         {error && <Alert severity="error">Ooops, something went wrong</Alert>}

@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { Alert } from "@mui/material";
 
 import { UserCreateModal } from "../../user-create-edit/components/UserCreateModal";
 import { UserEditModal } from "../../user-create-edit/components/UserEditModal";
@@ -6,7 +7,6 @@ import { UserDeleteConfirmPrompt } from "../../user-delete/UserDeleteConfirmProm
 import userApi from "../userApi";
 
 import { UserListTable } from "./UserListTable";
-import { Alert } from "@mui/material";
 
 const { useGetUsersQuery } = userApi;
 

@@ -9,11 +9,11 @@ export const UserListLoadingOverlay: FC<
   return (
     <Backdrop
       sx={(theme) => ({
-        color: "#fff",
         zIndex: theme.zIndex.drawer + 1,
         position: "relative",
       })}
       open={true}
+      data-testid="data-grid-loading-overlay"
     >
       <CircularProgress color="inherit" />
     </Backdrop>
