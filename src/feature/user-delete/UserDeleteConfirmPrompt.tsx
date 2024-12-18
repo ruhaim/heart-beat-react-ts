@@ -75,10 +75,14 @@ export const UserDeleteConfirmPrompt: FC<UserDeleteConfirmPromptProps> = ({
 
         {error && <Alert severity="error">Ooops, something went wrong</Alert>}
         <DialogActions>
-          <Button onClick={handleClose} disabled={isLoading}>
+          <Button onClick={handleClose}
+            data-testid={`user-delete-dismiss-btn-${userId}`}
+            disabled={isLoading}>
             No
           </Button>
-          <Button onClick={handleActionButtonClick} disabled={isLoading}>
+          <Button onClick={handleActionButtonClick}
+            data-testid={`user-delete-ok-btn-${userId}`}
+            disabled={isLoading}>
             {actionBtnLabel}
           </Button>
         </DialogActions>

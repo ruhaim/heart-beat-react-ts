@@ -51,6 +51,7 @@ export const FullScreenModal: FC<PropsWithChildren<FullScreenModalProps>> = ({
               color="inherit"
               onClick={handleClose}
               aria-label="close"
+              data-testid="dialog-close-btn"
             >
               <CloseIcon />
             </IconButton>
