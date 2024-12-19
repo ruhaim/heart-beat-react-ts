@@ -53,7 +53,7 @@
 
 ---
 
-[![IMAGE ALT TEXT](http://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg)](http://www.youtube.com/watch?v=YOUTUBE_VIDEO_ID_HERE "Video Title")
+[![App demo video](http://img.youtube.com/vi/3IgIM1oAsRA/0.jpg)](http://www.youtube.com/watch?v=3IgIM1oAsRA "Watch App demo Video")
 
 ## Development Dependencies
 
