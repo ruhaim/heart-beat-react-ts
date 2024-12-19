@@ -5,6 +5,11 @@
 ### Pre-requisites
 - requires nvm v20 or above
 
+### Local setup
+- pull the repo to your local machine
+- run `npm i`
+- run `npm run dev`
+
 ## Project Overview
 - **Name**: `heart-beat-users`
 - **Homepage**: [GitHub Pages](https://ruhaim.github.io/heart-beat-react-ts/)
@@ -106,6 +111,10 @@
   - Automatically builds and deploys to Github pages when a commit to the `main`branch is made
 
 ---
+
+## Known Limitations
+- The visx charts are made to be responsive, but in smaller width screens the labels on the x-axis overlap, It requires investing more time to fix.
+- The repo is deliberately named as Heart Beat to avoid conflicting with intended company's name
 
 ## Conclusion
 
