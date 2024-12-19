@@ -4,7 +4,7 @@ import "ag-grid-community/styles/ag-theme-material.min.css"; // Optional Theme a
 import { FC, useCallback, useMemo } from "react";
 import { useColorScheme } from "@mui/material/styles";
 import { ColDef } from "ag-grid-community";
-import { AgGridReact, AgGridReactProps } from "ag-grid-react"; // React Data Grid Component
+import { AgGridReact, AgGridReactProps } from "ag-grid-react";
 
 import { useAppDispatch } from "../../../store/storeHooks";
 import { setUserDeleteState, setUserEditState } from "../userListSlice";
@@ -31,7 +31,6 @@ export const UserListTable: FC<UserListTableProps> = (props) => {
     [appDispatch]
   );
 
-  // Column Definitions: Defines the columns to be displayed.
   const colDefs = useMemo<ColDef<User>[]>(
     () => [
       {
@@ -87,8 +86,8 @@ export const UserListTable: FC<UserListTableProps> = (props) => {
 
   return (
     <div
-      className={`ag-theme-material${mode === "dark" ? "-dark" : ""}`} // applying the Data Grid theme
-      style={{ height: "100%" }} // the Data Grid will fill the size of the parent container
+      className={`ag-theme-material${mode === "dark" ? "-dark" : ""}`}
+      style={{ height: "100%" }}
       data-testid="scrollable-grid"
     >
       <AgGridReact
@@ -96,12 +95,6 @@ export const UserListTable: FC<UserListTableProps> = (props) => {
         columnDefs={colDefs}
         onRowDoubleClicked={(row) => {
           showEditPopup({ userId: row.data?.id, userEntity: row.data });
-        }}
-        onFilterChanged={() => {
-          // console.log({ event });
-        }}
-        onModelUpdated={() => {
-          // console.log(event.newData);
         }}
         suppressDragLeaveHidesColumns={true}
         loadingOverlayComponent={UserListLoadingOverlay}

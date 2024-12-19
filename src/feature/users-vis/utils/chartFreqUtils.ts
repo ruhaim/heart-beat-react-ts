@@ -22,6 +22,5 @@ export const getFrequencyList = (
     });
 };
 
-// Accessors
 export const getKey = (d: KeyFrequency) => d.key;
 export const getKeyFrequency = (d: KeyFrequency) => d.frequency;

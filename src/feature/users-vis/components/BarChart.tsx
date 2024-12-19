@@ -31,17 +31,13 @@ const BarChartImpl: FC<BarChartImplProps> = ({
   const barColor = theme.palette.secondary.main;
   const textColor = theme.palette.text.secondary;
 
-  // Bounds
   const xMax = Math.max(width - horizontalMargin, 1);
   const yMax = Math.max(height - verticalMargin, 1);
 
-  // Scales (memoize for performance)
-  // More info: https://observablehq.com/@d3/d3-scaleband
   const xScale = useMemo(
     () =>
       scaleBand({
         range: [0, xMax],
-        // round: true,
         domain: data.map(getKey),
         padding: 0.4,
       }),
@@ -52,7 +48,6 @@ const BarChartImpl: FC<BarChartImplProps> = ({
     () =>
       scaleLinear({
         range: [yMax, 0],
-        // round: true,
         domain: [0, Math.max(...data.map(getKeyFrequency))],
       }),
     [data, yMax]
@@ -92,13 +87,11 @@ const BarChartImpl: FC<BarChartImplProps> = ({
                 textAnchor="middle"
                 fill={textColor}
               >
-                {/* Breakpoint: https://tailwindcss.com/docs/breakpoints */}
                 {format("")(keyFrequency)}
               </Text>
             </React.Fragment>
           );
         })}
-        {/* Default values: https://github.com/airbnb/visx/blob/master/packages/visx-axis/src/axis/AxisBottom.tsx */}
         <AxisBottom
           scale={xScale}
           label={bottomAxisText}

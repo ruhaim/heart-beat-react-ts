@@ -1,4 +1,4 @@
-import '@testing-library/jest-dom'; // Provides extended matchers
+import '@testing-library/jest-dom';
 
 import { ReactNode } from 'react';
 import { configureStore } from '@reduxjs/toolkit';
@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import { afterEach } from 'vitest';
 
 import userListSlice from '../feature/users-list/userListSlice';
-import { makeServer, MakeServerParams } from '../server'; // MirageJS server
+import { makeServer, MakeServerParams } from '../server';
 import { apiSlice } from '../store/apiSlice';
 
 export const setupTestServer = (params?: MakeServerParams) => {
