@@ -1,4 +1,4 @@
-import '@testing-library/jest-dom';
+import '@testing-library/jest-dom'
 
 import { ReactNode } from 'react';
 import { configureStore } from '@reduxjs/toolkit';
@@ -9,6 +9,7 @@ import { afterEach } from 'vitest';
 import userListSlice from '../feature/users-list/userListSlice';
 import { makeServer, MakeServerParams } from '../server';
 import { apiSlice } from '../store/apiSlice';
+import { ThemeProvider } from '@/theme/ThemeProvider';
 
 export const setupTestServer = (params?: MakeServerParams) => {
     let server: ReturnType<typeof makeServer>;
@@ -20,7 +21,6 @@ export const setupTestServer = (params?: MakeServerParams) => {
 
     afterEach(() => {
         server?.shutdown();
-        console.log("Shutting down")
     });
     return { getServer: () => server }
 };
@@ -39,6 +39,6 @@ export const createTestStore = () => {
 
 
 export const renderWithProviders = (ui: ReactNode, { store = createTestStore() } = {}) => {
-    return render(<Provider store={store} > {ui} </Provider>);
+    return render(<Provider store={store} ><ThemeProvider>{ui}</ThemeProvider>  </Provider>);
 };
 

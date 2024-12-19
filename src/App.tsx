@@ -27,6 +27,7 @@ function App() {
             onClick={() => {
               dispatch(setUserCreateState({}));
             }}
+            data-testid="create-new-user-btn"
           >
             Add New User
           </Button>

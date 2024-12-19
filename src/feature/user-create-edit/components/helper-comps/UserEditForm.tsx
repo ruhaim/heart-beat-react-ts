@@ -99,11 +99,11 @@ const UserEditForm: FC<UserEditFormProps> = ({ userId, userEntity }) => {
         />
 
         <FormControl>
-          <InputLabel id="gender-label">Age</InputLabel>
+          <InputLabel id="gender-label">Gender</InputLabel>
           <Select
             labelId="gender-label"
             id="gender"
-            label="Age"
+            label="Gender"
             {...formik.getFieldProps("gender")}
           >
             <MenuItem value={"male"}>Male</MenuItem>
