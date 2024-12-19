@@ -14,7 +14,7 @@ export const UserDashboard: FC = () => {
   const { isLoading, data: userList, error } = useGetUsersQuery();
 
   if (error) {
-    return <Alert severity="error">Ooops, something went wrong</Alert>
+    return <Alert severity="error">Ooops, something went wrong</Alert>;
   }
   return (
     <>

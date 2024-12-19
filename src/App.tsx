@@ -23,7 +23,8 @@ function App() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Heartpace
           </Typography>
-          <Button color="inherit"
+          <Button
+            color="inherit"
             onClick={() => {
               dispatch(setUserCreateState({}));
             }}

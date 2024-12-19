@@ -1,4 +1,4 @@
-import { FC, Suspense, lazy } from "react";
+import { FC, lazy,Suspense } from "react";
 
 import { useAppDispatch, useAppSelector } from "../../../store/storeHooks";
 import { setUserCreateState } from "../../users-list/userListSlice";

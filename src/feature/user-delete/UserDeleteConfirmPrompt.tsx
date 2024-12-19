@@ -41,7 +41,6 @@ export const UserDeleteConfirmPrompt: FC<UserDeleteConfirmPromptProps> = ({
     onClose?.();
   };
   const handleActionButtonClick = async () => {
-
     if (!userId) {
       return onClose?.();
     }
@@ -65,10 +64,11 @@ export const UserDeleteConfirmPrompt: FC<UserDeleteConfirmPromptProps> = ({
         open={open}
         onClose={handleClose}
         TransitionComponent={TransitionUp}
-
-
       >
-        <DialogTitle data-testid={`user-delete-confirm-${userId}`} > {title}</DialogTitle>
+        <DialogTitle data-testid={`user-delete-confirm-${userId}`}>
+          {" "}
+          {title}
+        </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
             Are you sure to delete the user{" "}
@@ -76,20 +76,31 @@ export const UserDeleteConfirmPrompt: FC<UserDeleteConfirmPromptProps> = ({
           </DialogContentText>
         </DialogContent>
 
-        {error && <Alert data-testid={`user-delete-api-error-${userId}`} severity="error">Ooops, something went wrong</Alert>}
+        {error && (
+          <Alert
+            data-testid={`user-delete-api-error-${userId}`}
+            severity="error"
+          >
+            Ooops, something went wrong
+          </Alert>
+        )}
         <DialogActions>
-          <Button onClick={handleClose}
+          <Button
+            onClick={handleClose}
             data-testid={`user-delete-dismiss-btn-${userId}`}
-            disabled={isLoading}>
+            disabled={isLoading}
+          >
             No
           </Button>
-          <Button onClick={handleActionButtonClick}
+          <Button
+            onClick={handleActionButtonClick}
             data-testid={`user-delete-ok-btn-${userId}`}
-            disabled={isLoading}>
+            disabled={isLoading}
+          >
             {actionBtnLabel}
           </Button>
         </DialogActions>
-      </Dialog >
-    </React.Fragment >
+      </Dialog>
+    </React.Fragment>
   );
 };

@@ -48,7 +48,7 @@ const UserEditForm: FC<UserEditFormProps> = ({ userId, userEntity }) => {
   });
 
   return (
-    <Container component="section" >
+    <Container component="section">
       <Stack
         component="form"
         title="Edit User"

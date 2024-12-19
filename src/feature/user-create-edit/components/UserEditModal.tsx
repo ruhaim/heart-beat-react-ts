@@ -1,14 +1,13 @@
 import { FC, Suspense } from "react";
+import { lazy } from "react";
+import CircularProgress from "@mui/material/CircularProgress";
 
 import { useAppDispatch, useAppSelector } from "../../../store/storeHooks";
 import { setUserEditState } from "../../users-list/userListSlice";
 
 import { FullScreenModal } from "./helper-comps/FullScreenModal";
-import CircularProgress from "@mui/material/CircularProgress";
 
-import { lazy } from 'react';
-
-const UserEditForm = lazy(() => import('./helper-comps/UserEditForm'));
+const UserEditForm = lazy(() => import("./helper-comps/UserEditForm"));
 
 export const UserEditModal: FC = () => {
   const editState = useAppSelector((state) => state.userListState.editState);

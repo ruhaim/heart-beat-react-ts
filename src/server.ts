@@ -39,8 +39,8 @@ type AppRegistry = Registry<typeof models, typeof factories>;
 type AppSchema = Schema<AppRegistry>;
 
 export type MakeServerParams = {
-  environment?: string,
-}
+  environment?: string;
+};
 
 export function makeServer({ environment = "test" }: MakeServerParams = {}) {
   const server = createServer({
