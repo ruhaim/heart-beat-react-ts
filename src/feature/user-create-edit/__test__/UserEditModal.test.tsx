@@ -22,7 +22,7 @@ test('should update user when user details updated', async () => {
 
     await screen.findByTestId(`user-edit-form-${user.id}`);
 
-    const form = screen.getByTestId(`user-edit-form-${user.id}`)
+    screen.getByTestId(`user-edit-form-${user.id}`)
 
     const userIdInput = await screen.findByLabelText<HTMLInputElement>("User Id")
     const nameInput = await screen.findByLabelText<HTMLInputElement>("Name")
