@@ -63,9 +63,9 @@ export const UserDeleteConfirmPrompt: FC<UserDeleteConfirmPromptProps> = ({
         open={open}
         onClose={handleClose}
         TransitionComponent={TransitionUp}
-        data-testid={`user-delete-confirm-${userId}`}
+
       >
-        <DialogTitle>{title}</DialogTitle>
+        <DialogTitle data-testid={`user-delete-confirm-${userId}`} > {title}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
             Are you sure to delete the user{" "}
@@ -86,7 +86,7 @@ export const UserDeleteConfirmPrompt: FC<UserDeleteConfirmPromptProps> = ({
             {actionBtnLabel}
           </Button>
         </DialogActions>
-      </Dialog>
-    </React.Fragment>
+      </Dialog >
+    </React.Fragment >
   );
 };

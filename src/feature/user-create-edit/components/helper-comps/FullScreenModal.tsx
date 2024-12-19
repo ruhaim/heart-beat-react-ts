@@ -7,7 +7,7 @@ import IconButton from "@mui/material/IconButton";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 
-import { TransitionUp } from "../../../../theme/transition/TransitionUp";
+import { TransitionUp } from "@/theme/transition/TransitionUp";
 
 type FullScreenModalProps = {
   onClose?: () => void
