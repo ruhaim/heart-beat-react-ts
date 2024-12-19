@@ -41,10 +41,12 @@ export const UserDeleteConfirmPrompt: FC<UserDeleteConfirmPromptProps> = ({
     onClose?.();
   };
   const handleActionButtonClick = async () => {
+
     if (!userId) {
       return onClose?.();
     }
     const result = await triggerDeleteUser({ id: userId });
+
     if (result.data) {
       dispatch(setUserDeleteState());
       return onClose?.();
@@ -52,10 +54,10 @@ export const UserDeleteConfirmPrompt: FC<UserDeleteConfirmPromptProps> = ({
   };
 
   useEffect(() => {
-    if (userId) {
+    if (!open) {
       reset();
     }
-  }, [reset, userId]);
+  }, [reset, open]);
 
   return (
     <React.Fragment>
@@ -63,6 +65,7 @@ export const UserDeleteConfirmPrompt: FC<UserDeleteConfirmPromptProps> = ({
         open={open}
         onClose={handleClose}
         TransitionComponent={TransitionUp}
+
 
       >
         <DialogTitle data-testid={`user-delete-confirm-${userId}`} > {title}</DialogTitle>
@@ -73,7 +76,7 @@ export const UserDeleteConfirmPrompt: FC<UserDeleteConfirmPromptProps> = ({
           </DialogContentText>
         </DialogContent>
 
-        {error && <Alert severity="error">Ooops, something went wrong</Alert>}
+        {error && <Alert data-testid={`user-delete-api-error-${userId}`} severity="error">Ooops, something went wrong</Alert>}
         <DialogActions>
           <Button onClick={handleClose}
             data-testid={`user-delete-dismiss-btn-${userId}`}

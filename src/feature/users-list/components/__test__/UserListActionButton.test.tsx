@@ -16,7 +16,6 @@ test('should enter edit mode when edit button is clicked', async () => {
     server.create('user', user)
 
     renderWithProviders(<UserDashboard />);
-
     await screen.findByTestId(`user-edit-btn-${user.id}`);
 
 
@@ -24,6 +23,7 @@ test('should enter edit mode when edit button is clicked', async () => {
     fireEvent.click(editBtn)
 
     await screen.findByTestId(`user-edit-form-${user.id}`);
+
 
 
 });
