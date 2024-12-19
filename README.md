@@ -55,7 +55,7 @@
 
 ## Video Demo
 [![App demo video](http://img.youtube.com/vi/3IgIM1oAsRA/0.jpg)](http://www.youtube.com/watch?v=3IgIM1oAsRA "Watch App demo Video")
-[Watch Video here][http://www.youtube.com/watch?v=3IgIM1oAsRA] 
+[Watch Video here](http://www.youtube.com/watch?v=3IgIM1oAsRA)
 
 ## Development Dependencies
 
