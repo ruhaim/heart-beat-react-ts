@@ -1,10 +1,11 @@
-import { screen, waitFor, waitForElementToBeRemoved } from '@testing-library/react';
+import { screen, waitForElementToBeRemoved } from '@testing-library/react';
 import { Response } from "miragejs";
 
-import fixture from '../../../../__test__/fixtures/users.3.fixtures.json'
-import { renderWithProviders, setupTestServer } from "../../../../__test__/setup";
-import { User } from "../../userTypes";
+import fixture from '@/__test__/fixtures/users.3.fixtures.json'
+import { renderWithProviders, setupTestServer } from "@/__test__/setup";
+
 import { UserDashboard } from "../UserDashboard";
+import { User } from '../../userTypes';
 
 
 const { getServer } = setupTestServer({
@@ -19,7 +20,7 @@ test('should render error if get users api fails', async () => {
 
     renderWithProviders(<UserDashboard />);
 
-    await waitFor(() => screen.getByText('Ooops, something went wrong'));
+    await screen.findByText('Ooops, something went wrong');
 
 
 });
@@ -34,7 +35,7 @@ test('should render data in data grid after successful load', async () => {
     const gridElement = screen.getByTestId('scrollable-grid');
     expect(gridElement).toBeInTheDocument();
 
-    await waitFor(() => screen.getByTestId('data-grid-loading-overlay'));
+    await screen.findByTestId('data-grid-loading-overlay');
 
     await waitForElementToBeRemoved(() => screen.queryByTestId('data-grid-loading-overlay'));
 

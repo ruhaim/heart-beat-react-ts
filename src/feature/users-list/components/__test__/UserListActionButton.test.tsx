@@ -1,7 +1,7 @@
-import { fireEvent, screen, waitFor } from '@testing-library/react';
+import { fireEvent, screen } from '@testing-library/react';
 
-import fixture from '../../../../__test__/fixtures/users.3.fixtures.json'
-import { renderWithProviders, setupTestServer } from "../../../../__test__/setup";
+import fixture from '@/__test__/fixtures/users.3.fixtures.json'
+import { renderWithProviders, setupTestServer } from "@/__test__/setup";
 import { User } from "../../userTypes";
 import { UserDashboard } from "../UserDashboard";
 
@@ -17,13 +17,13 @@ test('should enter edit mode when edit button is clicked', async () => {
 
     renderWithProviders(<UserDashboard />);
 
-    await waitFor(() => screen.getByTestId(`user-edit-btn-${user.id}`));
+    await screen.findByTestId(`user-edit-btn-${user.id}`);
 
 
     const editBtn = screen.getByTestId(`user-edit-btn-${user.id}`)
     fireEvent.click(editBtn)
 
-    await waitFor(() => screen.getByTestId(`user-edit-form-${user.id}`));
+    await screen.findByTestId(`user-edit-form-${user.id}`);
 
 
 });
@@ -35,13 +35,13 @@ test('should show confirmation dialog when user delete button clicked', async ()
 
     renderWithProviders(<UserDashboard />);
 
-    await waitFor(() => screen.getByTestId(`user-delete-btn-${user.id}`));
+    await screen.findByTestId(`user-delete-btn-${user.id}`);
 
 
     const editBtn = screen.getByTestId(`user-delete-btn-${user.id}`)
     fireEvent.click(editBtn)
 
-    await waitFor(() => screen.getByTestId(`user-delete-confirm-${user.id}`));
+    await screen.findByTestId(`user-delete-confirm-${user.id}`);
 
 
 });

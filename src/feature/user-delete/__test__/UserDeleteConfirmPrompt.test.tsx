@@ -1,9 +1,9 @@
 import { fireEvent, screen } from '@testing-library/react';
 
-import fixture from '../../../__test__/fixtures/users.3.fixtures.json'
-import { renderWithProviders, setupTestServer } from "../../../__test__/setup";
-import { UserDashboard } from '../../users-list/components/UserDashboard';
-import { User } from '../../users-list/userTypes';
+import fixture from '@/__test__/fixtures/users.3.fixtures.json'
+import { renderWithProviders, setupTestServer } from "@/__test__/setup";
+import { UserDashboard } from '@/feature/users-list/components/UserDashboard';
+import { User } from '@/feature/users-list/userTypes';
 
 
 const { getServer } = setupTestServer({
