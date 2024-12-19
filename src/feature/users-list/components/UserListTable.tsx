@@ -37,7 +37,6 @@ export const UserListTable: FC<UserListTableProps> = (props) => {
         field: "id",
         filter: true,
         maxWidth: 110,
-        resizable: false,
       },
       { field: "name", filter: true, minWidth: 120, initialFlex: 1 },
       {

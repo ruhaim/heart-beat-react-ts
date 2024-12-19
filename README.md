@@ -49,8 +49,11 @@
 | `lint`       | Lints TypeScript and JavaScript files.            |
 | `lint:fix`   | Automatically fixes linting issues.               |
 | `prepare`    | Installs Husky for pre-commit hooks.              |
+| `test`.      | Runs the integration tests in the repo            |
 
 ---
+
+[![IMAGE ALT TEXT](http://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg)](http://www.youtube.com/watch?v=YOUTUBE_VIDEO_ID_HERE "Video Title")
 
 ## Development Dependencies
 
