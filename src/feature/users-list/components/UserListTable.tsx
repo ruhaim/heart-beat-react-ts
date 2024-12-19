@@ -37,22 +37,25 @@ export const UserListTable: FC<UserListTableProps> = (props) => {
         field: "id",
         filter: true,
         maxWidth: 110,
+        initialFlex: 1
       },
-      { field: "name", filter: true, minWidth: 120, initialFlex: 1 },
+      { field: "name", filter: true, minWidth: 120, initialFlex: 3 },
       {
         field: "gender",
         width: 100,
         minWidth: 80,
         resizable: false,
         filter: "agSetColumnFilter",
+        initialFlex: 1
       },
-      { field: "city", filter: "agSetColumnFilter", width: 100, minWidth: 80 },
+      { field: "city", filter: "agSetColumnFilter", width: 100, minWidth: 80, initialFlex: 1 },
       {
         field: "dob",
         filter: "agDateColumnFilter",
         width: 100,
         minWidth: 80,
         headerName: "Date of Birth",
+        initialFlex: 2,
         valueFormatter: ({ value }) => {
           if (!value) {
             return value;
